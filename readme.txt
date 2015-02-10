@@ -1,17 +1,17 @@
-# oik-types 
-* Contributors: bobbingwide
-* Donate link: http://www.oik-plugins.com/oik/oik-donate/
-* Tags: custom post types, custom fields, and custom taxonomies UI for oik
-* Requires at least: 3.9
-* Tested up to: 4.1
-* Stable tag: 1.7
-* License: GPLv2 or later
-* License URI: http://www.gnu.org/licenses/gpl-2.0.html
+=== oik-types ===
+Contributors: bobbingwide
+Donate link: http://www.oik-plugins.com/oik/oik-donate/
+Tags: custom post types, custom fields, and custom taxonomies UI for oik
+Requires at least: 3.9
+Tested up to: 4.1
+Stable tag: 1.7
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-## Description 
+== Description ==
 Create custom post types, fields and taxonomies that are integrated with the oik API to bring the power of oik to your website content.
-
-* Define new custom post types
+ 
+* Define new custom post types 
 * Extend existing post types
 * Define new custom fields
 * Define the fields and taxonomy relationships
@@ -30,36 +30,36 @@ For advanced users:
 * Extend your custom post types with action and hook filters
 * Develop your own custom field plugins using the oik APIs
 
-### Features:
+=== Features:===
 * Advanced API for plugin developers
 * Builds on oik and oik-fields extensible architecture
 * Extend pre-existing custom post type plugins that use the oik API
 * Select post types to be shown on the home page
 * Select post types to be publicized by Jetpack
 
-#### Shortcodes 
+==== Shortcodes ====  
 oik-types does not define any shortcodes of its own. You simply use the shortcodes from oik and oik-fields
 
-#### Actions and filter hooks 
+==== Actions and filter hooks ====
 * action "oik_types_box"
 * action "oik_fie_edit_field_options"
-* action "oik_fie_edit_field_type_$type"
+* action "oik_fie_edit_field_type_$type" 
 * filter "oik_query_field_types"
 
-## Installation 
+== Installation ==
 1. Upload the contents of the oik-types plugin to the `/wp-content/plugins/oik-types' directory
 1. Activate the oik-types plugin through the 'Plugins' menu in WordPress
 
-* Note: oik-types is dependent upon the oik base plugin and the oik-fields plugin.
+Note: oik-types is dependent upon the oik base plugin and the oik-fields plugin.
 
-If you don't install and activate the oik-fields plugin then oik-types won't be called to apply changes to the post type registrations.
+If you don't install and activate the oik-fields plugin then oik-types won't be called to apply changes to the post type registrations. 
 
-## Frequently Asked Questions 
+== Frequently Asked Questions ==
 
-# What is this plugin for? 
+= What is this plugin for? =
 To help you define custom content for your website without having to write any code.
 
-# How is the data implemented? 
+= How is the data implemented? = 
 
 oik-types does not create any tables of its own.
 It records the information in structured arrays in the wp_options table.
@@ -73,103 +73,103 @@ Each instance of a custom post type is created in the wp_posts table
 Each instance of a custom field for a custom post type is created in the wp_postmeta table
 Each instance of a custom taxonomy is created in the wp_taxonomy and related tables
 
-# Do I need to flush permalinks? 
+= Do I need to flush permalinks? =
 Yes. When you first create a new custom post type.
 If you do not then you will most likely receive a 404 message.
 
-# What other field types are there? 
+= What other field types are there? =
 The following field types are provided by the plugins listed below:
 
 * msoft   - oik-msoft
 * rating  - oik-rating
 * userref - oik-user
 
-# What is oik-fields dependent upon? 
+= What is oik-fields dependent upon? =
 This plugin is dependent upon the oik base plugin. It specifically includes the following files:
 
   oik_require( "includes/bw_register.inc" );
   oik_require( "bw_metadata.inc" );
-  oik_require2( "includes/bw_fields.inc", "oik-fields", "oik" ); // When required!
-
-# Can I get support? 
+  oik_require2( "includes/bw_fields.inc", "oik-fields", "oik" ); // When required! 
+  
+= Can I get support? = 
 Yes. Through the oik-plugins website.
 
-# Can this plugin be used with other CPT managers? 
+= Can this plugin be used with other CPT managers? = 
 Yes, it can. But I wouldn't recommend it.
 
-# Can this plugin extend other CPTs? 
+= Can this plugin extend other CPTs? =
 Yes. You can use it to override the definition of existing (custom) post types.
 You can add fields but you can't remove them.
 
-# Is there an import/export facility? 
+= Is there an import/export facility? =
 No... but there could be as it's just a case of exporting the data from wp_options using an "Export/import options plugin."
 
-## Screenshots 
+== Screenshots ==
 1. tbc
 
-## Upgrade Notice 
-# 1.7 
+== Upgrade Notice ==
+= 1.7 = 
 Required to display native "attachments" on the home page. Tested with WordPress 4.1 and WordPress Multi Site.
 
-# 1.6 
+= 1.6 =   
 Required if you want to select the post types to be shown on the home page. Tested with WordPress 4.0 and WordPress Multi Site.
 
-# 1.5 
-Now supports "has_archive" setting on post types. Required for wp-a2z.com
+= 1.5 = 
+Now supports "has_archive" setting on post types. Required for wp-a2z.com 
 
-# 1.4 
+= 1.4 =
 Added support for JetPack 'publicize' function. Improved dependency checking
 
-# 1.3 
-Required for oik-plugins use of bw_related
+= 1.3 =
+Required for oik-plugins use of bw_related 
 
-# 1.2 
+= 1.2 =
 Required for setting more information for UI defined fields.
 Alternative is to use a plugin and write the required APIs
 
-# 1.1 
+= 1.1 =
 * Depends on oik v2.1-alpha.1028 and oik-fields v1.19.1028
 
-# 0.1 
+= 0.1 = 
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
-## Changelog 
-# 1.7 
+== Changelog ==
+= 1.7 = 
 * Added: "home" post_type support for the native "attachment" post_type. Extends the "pre_get_posts" filter.
 
-# 1.6 
+= 1.6 = 
 * Added: "home" post_type_support value for identifying post types which will appear on the front page / blog page
 * Added: "pre_get_posts" filter to handle post types with post_type_support of "home"
 * Fixed: Column headings for Taxonomies
 * Added: Show in admin bar checkbox. De-select to remove less used post types from the drop down Add new menu
 * Fixed: Add "Archive?" to post type column headings.
 * Started: Started developing logic to cater for changes to the "has_archive" setting, to correct rewrite rules
-* Changed: Commented out most bw_trace2() calls
-
-# 1.5 
+* Changed: Commented out most bw_trace2() calls 
+ 
+= 1.5 =
 * Added: Support for has_archive. Simple implementation as a check box.
 
-# 1.4 
+= 1.4 = 
 * Added: Support for JetPack 'publicize' - can be selected for ANY post type
 * Changed: Dependency checking. Now depends on oik v2.2 and oik-fields v1.35
 
-# 1.3 
+= 1.3 =
 * Added: Support for the #optional setting for 'noderef' and 'select' type fields
 * Added: Dependency checking on oik and oik-fields
 
-# 1.2 
+= 1.2 = 
 * Added: Some field options can now be defined in the admin pages. types > fields
 * Added: rewrite setting for types - work in progress
 * Changed: Some usage notes in this file.
 
-# 1.1 
+= 1.1 =
 * First version on oik-plugins.co.uk
 
-# 0.1 
+= 0.1 = 
 * Added: New plugin
 
-## Further reading 
+== Further reading ==
 Read more about oik plugins and themes
 * [oik-plugin](http://www.oik-plugins.com)
-* [oik-fields](http://www.oik-plugins.com/oik-plugins/oik-fields)
+* [oik-fields](http://www.oik-plugins.com/oik-plugins/oik-fields) 
 
