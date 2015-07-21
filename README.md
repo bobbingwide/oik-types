@@ -3,8 +3,8 @@
 * Donate link: http://www.oik-plugins.com/oik/oik-donate/
 * Tags: custom post types, custom fields, and custom taxonomies UI for oik
 * Requires at least: 3.9
-* Tested up to: 4.1
-* Stable tag: 1.7
+* Tested up to: 4.2.2
+* Stable tag: 1.8
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 1. tbc
 
 ## Upgrade Notice 
+# 1.8 
+Adds support to allow Media files to be chosen for Nav menu items
+
 # 1.7 
 Required to display native "attachments" on the home page. Tested with WordPress 4.1 and WordPress Multi Site.
 
@@ -134,6 +137,9 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 ## Changelog 
+# 1.8 
+* Added: Now supports selection of Media files from Nav menus
+
 # 1.7 
 * Added: "home" post_type support for the native "attachment" post_type. Extends the "pre_get_posts" filter.
 

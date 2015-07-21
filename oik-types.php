@@ -4,7 +4,7 @@ Plugin Name: oik-types
 Plugin URI: http://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 1.7
+Version: 1.8
 Author: bobbingwide
 Author URI: http://www.oik-plugins.com//author/bobbingwide
 License: GPL2
@@ -91,6 +91,7 @@ function oikcpt_register_post_type( $type, $data ) {
  * If a post type is not already registered we don't have a problem defining it with "has_archive" set to true
  * So long as we remember that we need to revisit permalinks
  * 
+ * @TODO Complete the code one day! 2015/06/18
  * 
  * 
  */
@@ -132,7 +133,7 @@ function bw_update_post_type_supports( $type, $value ) {
  */
 function bw_update_post_type( $type, $args ) {
   $post_type_object = get_post_type_object( $type );
-  //bw_trace2( $post_type_object );
+  //bw_trace2();
   foreach ( $args as $key => $value ) {
     if ( $key == "supports" ) {
       bw_update_post_type_supports( $type, $value ); 
@@ -140,6 +141,12 @@ function bw_update_post_type( $type, $args ) {
     if ( $key == "has_archive" ) {
       bw_update_archive_stuff( $type, $value );
     }
+		/* 
+		 * Intercept when attachments are required in the nav_menu
+		 */
+		if ( $type == 'attachment' && "show_in_nav_menus" == $key && $value ) {
+			add_filter( "nav_menu_meta_box_object", "oik_types_nav_menu_meta_box_object", 11 );
+		} 
     if ( is_array( $value ) ) {
       // convert to stdObject? 
       $post_type_object->$key = (object) $value;
@@ -349,6 +356,28 @@ function oik_types_posts_where( $where, $this ) {
   $where = str_replace( "= 'publish'", "IN ( 'publish', 'inherit' )", $where );
   //bw_trace2();
   return( $where );
+}
+
+/**
+ * Override the default query for Media
+ *
+ * Implement "nav_menu_meta_box_object" to set the post_status to "inherit" when the
+ * object type is 'attachment'.
+ *
+ * Note: This code completely overrides the _default_query array.
+ *
+ * @param object $object
+ * @return filtered object 
+ * 
+ */
+function oik_types_nav_menu_meta_box_object( $object=null ) {
+	//bw_trace2();
+	if ( isset( $object->name ) && 'attachment' == $object->name ) {
+	  $object->_default_query = array(
+        'post_status' => 'inherit',
+      ); 
+	}
+	return( $object );
 }  
 
 /**
