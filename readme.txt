@@ -4,7 +4,7 @@ Donate link: http://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 3.9
 Tested up to: 4.2.2
-Stable tag: 1.8
+Stable tag: 1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,9 +105,16 @@ You can add fields but you can't remove them.
 No... but there could be as it's just a case of exporting the data from wp_options using an "Export/import options plugin."
 
 == Screenshots ==
-1. tbc
+1. Definition of the oik-fields CPT
+2. Three instances of the oik-fields CPT
+3. Fields defined by oik-types
+4. Fields to types relationships
+5. Taxonomies to types relationships
 
 == Upgrade Notice ==
+= 1.9 =
+Upgrade for support for Genesis post type supports options
+
 = 1.8 = 
 Adds support to allow Media files to be chosen for Nav menu items
 
@@ -137,6 +144,11 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 1.9 = 
+* Added: Support for 'post type supports' options for Genesis: genesis-layouts, genesis-seo, genesis-scripts, genesis-cpt-archives-settings
+* Added: Screenshots
+* Added: Language files for bb_BB ( bbboing ) test language
+
 = 1.8 =
 * Added: Now supports selection of Media files from Nav menus
 

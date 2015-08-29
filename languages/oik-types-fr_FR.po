@@ -7,7 +7,7 @@ msgstr ""
 "POT-Creation-Date: 2015-07-21 09:30:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
-"Language: bb_BB\n"
+"Language: fr_FR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
@@ -15,205 +15,205 @@ msgstr ""
 "Language-Team: LANGUAGE <LL@li.org>\n"
 #: admin/oik-f2t.php:21 admin/oik-types-admin.php:45
 msgid "Fields to Types"
-msgstr "Fidels tO Tpyes"
+msgstr ""
 
 #: admin/oik-f2t.php:43 admin/oik-fields.php:46 admin/oik-taxonomies.php:46
 #: admin/oik-types.php:43 admin/oik-x2t.php:43
 msgid "Preview"
-msgstr "Perievw"
+msgstr "Aperçu"
 
 #: admin/oik-f2t.php:66 admin/oik-fields.php:69 admin/oik-taxonomies.php:69
 #: admin/oik-types.php:62 admin/oik-x2t.php:66
 msgid "Add new"
-msgstr "Add nEw"
+msgstr "Ajouter"
 
 #: admin/oik-f2t.php:72
 msgid "Fields to types relationships"
-msgstr "Flieds tO tepys raihitpsleons"
+msgstr ""
 
 #: admin/oik-f2t.php:139
 msgid "Relationship already defined, try another type or field"
-msgstr "Rtielanoship ardleay dniefed, try anhtoer tpye Or fleid"
+msgstr ""
 
 #: admin/oik-f2t.php:183
 msgid "f2t must not be blank"
-msgstr "f2t msut nOt bE blnak"
+msgstr ""
 
 #: admin/oik-f2t.php:270
 msgid "Type"
-msgstr "Tpye"
+msgstr ""
 
 #: admin/oik-f2t.php:273
 msgid "Field"
-msgstr "Feild"
+msgstr ""
 
 #: admin/oik-f2t.php:287 admin/oik-fields.php:449 admin/oik-taxonomies.php:333
 #: admin/oik-types.php:630 admin/oik-x2t.php:283
 msgid "Preview not yet implemented"
-msgstr "Pvreiew nOt yEt imetenmepld"
+msgstr ""
 
 #: admin/oik-fields.php:24 admin/oik-types-admin.php:18
 #: admin/oik-types-admin.php:43
 msgid "Fields"
-msgstr "Fledis"
+msgstr ""
 
 #: admin/oik-fields.php:73
 msgid "Edit field"
-msgstr "Eidt felid"
+msgstr ""
 
 #: admin/oik-fields.php:75
 msgid "fields"
-msgstr "fedils"
+msgstr ""
 
 #: admin/oik-fields.php:176
 msgid "Field must not be blank"
-msgstr "Flied msut nOt bE balnk"
+msgstr ""
 
 #: admin/oik-fields.php:278 admin/oik-taxonomies.php:291
 msgid "Name"
-msgstr "Nmae"
+msgstr "Nom"
 
 #: admin/oik-fields.php:283 admin/oik-fields.php:429
 #: admin/oik-taxonomies.php:297 admin/oik-taxonomies.php:317
 msgid "Title"
-msgstr "Tlite"
+msgstr "Titre"
 
 #: admin/oik-fields.php:359 admin/oik-fields.php:385
 msgid "Single or multiple select"
-msgstr "Sinlge Or miullpte sceelt"
+msgstr ""
 
 #: admin/oik-fields.php:360
 msgid "Optional"
-msgstr "Onpoaitl"
+msgstr "Facultatif"
 
 #: admin/oik-fields.php:384
 msgid "Options"
-msgstr "Oiopnts"
+msgstr ""
 
 #: admin/oik-taxonomies.php:24 admin/oik-taxonomies.php:75
 msgid "taxonomies"
-msgstr "txoiameons"
+msgstr ""
 
 #: admin/oik-taxonomies.php:73
 msgid "Edit taxonomy"
-msgstr "Eidt tmnoxaoy"
+msgstr ""
 
 #: admin/oik-taxonomies.php:189
 msgid "Taxonomy must not be blank and not more than 32 characters"
-msgstr "Txnaomoy msut nOt bE bnlak And nOt mroe tahn 32 chreactars"
+msgstr ""
 
 #: admin/oik-taxonomies.php:279
 msgid "Tags"
-msgstr "Tags"
+msgstr "Étiquettes"
 
 #: admin/oik-taxonomies.php:280
 msgid "Categories"
-msgstr "Ceearotgis"
+msgstr "Catégories"
 
 #: admin/oik-taxonomies.php:292 admin/oik-taxonomies.php:316
 msgid "Label"
-msgstr "Lebal"
+msgstr ""
 
 #: admin/oik-types-admin.php:15
 msgid "[oik] Types"
-msgstr "[oik] Tpyes"
+msgstr ""
 
 #: admin/oik-types-admin.php:15 admin/oik-types-admin.php:17
 #: admin/oik-types-admin.php:42
 msgid "Types"
-msgstr "Tyeps"
+msgstr ""
 
 #: admin/oik-types-admin.php:16
 msgid "Summary"
-msgstr "Sarmumy"
+msgstr "L&rsquo;extrait"
 
 #: admin/oik-types-admin.php:17
 msgid "oik types"
-msgstr "OIk tyeps"
+msgstr ""
 
 #: admin/oik-types-admin.php:18
 msgid "oik fields"
-msgstr "OIk feldis"
+msgstr ""
 
 #: admin/oik-types-admin.php:19
 msgid "oik taxonomies"
-msgstr "OIk teomainxos"
+msgstr ""
 
 #: admin/oik-types-admin.php:19 admin/oik-types-admin.php:44
 msgid "Taxonomies"
-msgstr "Toomaxenis"
+msgstr ""
 
 #: admin/oik-types-admin.php:20
 msgid "oik fields to types"
-msgstr "OIk feilds tO tyeps"
+msgstr ""
 
 #: admin/oik-types-admin.php:20
 msgid "Fields to types"
-msgstr "Fedlis tO tpyes"
+msgstr ""
 
 #: admin/oik-types-admin.php:21
 msgid "oik taxonomies to types"
-msgstr "OIk texaminoos tO tepys"
+msgstr ""
 
 #: admin/oik-types-admin.php:21
 msgid "Taxonomies to types"
-msgstr "Texnaiomos tO tpyes"
+msgstr ""
 
 #: admin/oik-types-admin.php:41 admin/oik-types.php:21 admin/oik-types.php:68
 msgid "types"
-msgstr "tpeys"
+msgstr ""
 
 #: admin/oik-types-admin.php:46 admin/oik-x2t.php:21
 msgid "Taxonomies to Types"
-msgstr "Tanioeomxs tO Tpyes"
+msgstr ""
 
 #: admin/oik-types.php:66
 msgid "Edit type"
-msgstr "Eidt type"
+msgstr ""
 
 #: admin/oik-types.php:70
 msgid "registered types"
-msgstr "regesteird teyps"
+msgstr ""
 
 #: admin/oik-types.php:269
 msgid "Type must not be blank"
-msgstr "Tpye msut nOt bE banlk"
+msgstr ""
 
 #: admin/oik-types.php:358
 msgid "Post type"
-msgstr "Psot tpye"
+msgstr ""
 
 #: admin/oik-types.php:359 admin/oik-types.php:611
 msgid "Plural label"
-msgstr "Parull leabl"
+msgstr ""
 
 #: admin/oik-types.php:361 admin/oik-types.php:613
 msgid "Singular label"
-msgstr "Siagunlr lbael"
+msgstr ""
 
 #: admin/oik-types.php:362 admin/oik-types.php:614
 msgid "Description"
-msgstr "Dotesirpicn"
+msgstr ""
 
 #: admin/oik-x2t.php:72
 msgid "Taxonomies to types relationships"
-msgstr "Tneoxioams tO tpyes riipolasnehts"
+msgstr ""
 
 #: admin/oik-x2t.php:134
 msgid "Relationship already defined, try another Type or Taxonomy"
-msgstr "Rsihotlnieap aleardy dienfed, try aotnher Tpye Or Tmanxooy"
+msgstr ""
 
 #: admin/oik-x2t.php:178
 msgid "x2t must not be blank"
-msgstr "x2t msut nOt bE banlk"
+msgstr ""
 
 #: admin/oik-x2t.php:267
 msgid "taxonomy"
-msgstr "tanomoxy"
+msgstr ""
 
 #. Plugin Name of the plugin/theme
 msgid "oik-types"
-msgstr "OIk-types"
+msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid "http://www.oik-plugins.com/oik-plugins/oik-types"
@@ -221,11 +221,11 @@ msgstr "http://www.oik-plugins.com/oik-plugins/oik-types"
 
 #. Description of the plugin/theme
 msgid "oik types - custom post types, fields and taxonomies UI"
-msgstr "OIk tepys - csuotm post tpeys, fildes And tnaixoemos UI"
+msgstr ""
 
 #. Author of the plugin/theme
 msgid "bobbingwide"
-msgstr "biboigwbnde"
+msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "http://www.oik-plugins.com//author/bobbingwide"

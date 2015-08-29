@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2013, 2014
+<?php // (C) Copyright Bobbing Wide 2013-2015
 
 /**
  * oik-types - Custom Post Types page
@@ -519,12 +519,66 @@ function oik_cpt_edit_type_fields( $bw_type ) {
    
    PLUS
    'publicize' - for JetPack publicize
-   'home' - for oik-types 'pre_get_posts' filter 
+   'home' - for oik-types 'pre_get_posts' filter
+	 'genesis-layouts' - for Genesis layout selection  
  */
 function oik_cpt_edit_supports( $supports ) {
-  bw_backtrace();
-  $supports_options = bw_assoc( bw_as_array( "title,editor,author,thumbnail,excerpt,trackbacks,custom-fields,comments,revisions,page-attributes,post-formats,publicize,home" ) );
-  bw_select( "supports", "Supports", $supports, array( "#options" => $supports_options, "#multiple" => 11 ) );
+  //bw_backtrace();
+	add_filter( "oik_post_type_supports", "oik_cpt_oik_post_type_supports" );
+	$supports_options = oik_cpt_get_all_post_type_supports();
+	$count = count( $supports_options );
+  bw_select( "supports", "Supports", $supports, array( "#options" => $supports_options, "#multiple" => $count ) );
+}
+
+/**
+ * List all the currently registered post type supports options
+ *
+ */
+function oik_cpt_get_all_post_type_supports() {
+	global $_wp_post_type_features;
+  //$supports_options = bw_assoc( bw_as_array( "title,editor,author,thumbnail,excerpt,trackbacks,
+	//custom-fields,comments,revisions,page-attributes,post-formats,publicize,home,genesis-layouts" ) );
+	//bw_trace2( $_wp_post_type_features, "post type features" );
+	foreach ( $_wp_post_type_features as $post_type => $features ) {
+		foreach ( $features as $key => $value ) {
+			$supports_options[ $key ] = $key;
+		}
+	}
+	bw_trace2( $supports_options, "supports_options" );
+	$supports_options = apply_filters( "oik_post_type_supports", $supports_options );
+	return( $supports_options );
+}
+
+/**
+ * Implement "oik_post_types_supports" for oik-types
+ *
+ * oik_cpt_get_all_post_type_supports() can find the post type supports that have been registered
+ * but there's no way of knowing what post type supports could be available.
+ * 
+ * Until other plugins respond to this filter we'll add the ones we know about: 
+ * - home ( oik-types )
+ * - publicize ( Jetpack, oik-clone )
+ * - genesis-seo ( Genesis Framework )
+ * - genesis-scripts ( Genesis Framework )
+ * - genesis-layouts ( Genesis Framework )
+ * - genesis-cpt-archives-settings ( Genesis Framework )
+ * 
+ * Notes: 
+ * - genesis-seo may get overridden by WordPress SEO
+ * - genesis-cpt-archives-settings required has_archive
+ * 
+ * @param array $supports_options
+ * @return array updated array
+ */
+function oik_cpt_oik_post_type_supports( $supports_options ) {
+	$supports_options[ 'publicize' ] = "Publicize with Jetpack";
+	$supports_options[ 'home'] = "Display in blog home page";
+	$supports_options[ 'genesis-layouts' ] = "Genesis layouts";
+	$supports_options[ 'genesis-seo' ] = "Genesis SEO";
+	$supports_options[ 'genesis-scripts' ] = "Genesis scripts";
+	$supports_options[ 'genesis-cpt-archives-settings' ] = "Genesis CPT archives settings";
+	bw_trace2( $supports_options, "supports_options" );
+	return( $supports_options );	
 }
 
 /**
@@ -547,6 +601,7 @@ function oik_cpt_edit_rewrite( $rewrite ) {
 
 /** 
  * Display the Edit type form
+ *
  */
 function oik_cpt_edit_type( ) {
   global $bw_type;
