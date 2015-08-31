@@ -4,7 +4,7 @@ Plugin Name: oik-types
 Plugin URI: http://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 1.9
+Version: 1.9.0
 Author: bobbingwide
 Author URI: http://www.oik-plugins.com//author/bobbingwide
 License: GPL2
@@ -127,35 +127,42 @@ function bw_update_post_type_supports( $type, $value ) {
  * 
  * This includes removing "supports" capability as well as adding it.
  * 
- * @TODO - We also need to do something special for "has_archive" and "rewrite"; otherwise the rewrite rules will be incorrect.  
+ * @TODO - We also need to do something special for "has_archive" and "rewrite"; otherwise the rewrite rules will be incorrect.
+ *   
+ * @TODO - Confirm that ignoring labels for WordPress 4.3 is the right solution. See TRAC #33543
+ * Basically this solution means we can't override the builtin post types defaults. Is that the only minor issue? 
+ * 
  *
  * @param string $type - the post type registration to update
  * @param array $args - the options values to apply - already converted to bool where necessary
  */
 function bw_update_post_type( $type, $args ) {
-  $post_type_object = get_post_type_object( $type );
-  //bw_trace2();
-  foreach ( $args as $key => $value ) {
-    if ( $key == "supports" ) {
-      bw_update_post_type_supports( $type, $value ); 
-    }
-    if ( $key == "has_archive" ) {
-      bw_update_archive_stuff( $type, $value );
-    }
+	$post_type_object = get_post_type_object( $type );
+	//bw_trace2();
+	foreach ( $args as $key => $value ) {
+		if ( $key == "labels" ) {
+			continue;
+		}	
+		if ( $key == "supports" ) {
+			bw_update_post_type_supports( $type, $value ); 
+		}
+		if ( $key == "has_archive" ) {
+			bw_update_archive_stuff( $type, $value );
+		}
 		/* 
 		 * Intercept when attachments are required in the nav_menu
 		 */
 		if ( $type == 'attachment' && "show_in_nav_menus" == $key && $value ) {
 			add_filter( "nav_menu_meta_box_object", "oik_types_nav_menu_meta_box_object", 11 );
 		} 
-    if ( is_array( $value ) ) {
-      // convert to stdObject? 
-      $post_type_object->$key = (object) $value;
-    } else {
-      $post_type_object->$key = $value;
-    }  
-  }
-  //bw_trace2( $post_type_object, "after", false );
+		if ( is_array( $value ) ) {
+			// convert to stdObject? 
+			$post_type_object->$key = (object) $value;
+			} else {
+			$post_type_object->$key = $value;
+		}
+	}
+	//bw_trace2( $post_type_object, "after", false );
 } 
 
 /**

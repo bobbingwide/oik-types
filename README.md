@@ -3,8 +3,8 @@
 * Donate link: http://www.oik-plugins.com/oik/oik-donate/
 * Tags: custom post types, custom fields, and custom taxonomies UI for oik
 * Requires at least: 3.9
-* Tested up to: 4.2.2
-* Stable tag: 1.9
+* Tested up to: 4.3
+* Stable tag: 1.9.0
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -112,6 +112,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 ## Upgrade Notice 
+# 1.9.0 
+Upgrade for WordPress 4.3
+
 # 1.9 
 Upgrade for support for Genesis post type supports options
 
@@ -144,6 +147,10 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 ## Changelog 
+# 1.9.0 
+* Fixed: Applied a workaround to overcome problems raised as WordPress TRAC #33543.
+* Tested: with WordPress 4.3
+
 # 1.9 
 * Added: Support for 'post type supports' options for Genesis: genesis-layouts, genesis-seo, genesis-scripts, genesis-cpt-archives-settings
 * Added: Screenshots
