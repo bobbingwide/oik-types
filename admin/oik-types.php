@@ -503,28 +503,19 @@ function oik_cpt_edit_type_fields( $bw_type ) {
 
 /**
  * Display a multi-select box for "supports"
- 
-  Default: title and editor
-   'title'
-   'editor' (content)
-   'author'
-   'thumbnail' (featured image, current theme must also support post-thumbnails)
-   'excerpt'
-   'trackbacks'
-   'custom-fields'
-   'comments' (also will see comment count balloon on edit screen)
-   'revisions' (will store revisions)
-   'page-attributes' (menu order, hierarchical must be true to show Parent option)
-   'post-formats' add post formats, see Post Formats
-   
-   PLUS
-   'publicize' - for JetPack publicize
-   'home' - for oik-types 'pre_get_posts' filter
-	 'genesis-layouts' - for Genesis layout selection  
+ *
+ * The full set includes 
+ * - the 'core' values
+ * - the ones we know about
+ * - the others that have been registered and didn't know about
+ * 
+ * {@see TRAC #34009}
  */
 function oik_cpt_edit_supports( $supports ) {
   //bw_backtrace();
-	add_filter( "oik_post_type_supports", "oik_cpt_oik_post_type_supports" );
+	add_filter( "oik_post_type_supports", "oik_cpt_oik_post_type_supports_core", 10 );
+	add_filter( "oik_post_type_supports", "oik_cpt_oik_post_type_supports", 11 );
+	add_filter( "oik_post_type_supports", "oik_cpt_oik_post_type_supports_unknown_registered", 12 );
 	$supports_options = oik_cpt_get_all_post_type_supports();
 	$count = count( $supports_options );
   bw_select( "supports", "Supports", $supports, array( "#options" => $supports_options, "#multiple" => $count ) );
@@ -533,29 +524,47 @@ function oik_cpt_edit_supports( $supports ) {
 /**
  * List all the currently registered post type supports options
  *
+ * @return array all the supports options that could possibly be chosen 
  */
 function oik_cpt_get_all_post_type_supports() {
-	global $_wp_post_type_features;
-  //$supports_options = bw_assoc( bw_as_array( "title,editor,author,thumbnail,excerpt,trackbacks,
-	//custom-fields,comments,revisions,page-attributes,post-formats,publicize,home,genesis-layouts" ) );
-	//bw_trace2( $_wp_post_type_features, "post type features" );
-	foreach ( $_wp_post_type_features as $post_type => $features ) {
-		foreach ( $features as $key => $value ) {
-			$supports_options[ $key ] = $key;
-		}
-	}
-	bw_trace2( $supports_options, "supports_options" );
+	$supports_options = array();
 	$supports_options = apply_filters( "oik_post_type_supports", $supports_options );
+	bw_trace2( $supports_options, "supports_options", false, BW_TRACE_DEBUG );
 	return( $supports_options );
 }
 
 /**
- * Implement "oik_post_types_supports" for oik-types
+ * Return the 'core' options used in add_post_type_supports()
  *
- * oik_cpt_get_all_post_type_supports() can find the post type supports that have been registered
+ * The full set may include features that are only available for certain post types
+ * 
+ * @param array $supports_options
+ * @return array The core set
+ */
+function oik_cpt_oik_post_type_supports_core( $supports_options ) {
+	$supports_options['author'] = __( "Author" );
+	$supports_options['comments'] = __( "Comments" );
+	$supports_options['custom-fields'] = __( "Custom fields" );
+	$supports_options['editor'] = __( "Content editor" );
+	$supports_options['excerpt'] = __( "Excerpt" );
+	$supports_options['page-attributes'] = __( "Page attributes" );
+	$supports_options['post-formats'] = __( "Post formats" );
+	$supports_options['revisions'] = __( "Revisions" );
+	$supports_options['thumbnail'] = __( "Thumbnail - featured image" );
+	$supports_options['trackbacks'] = __( "Trackbacks" );
+  $supports_options['title'] = __( "Title" );
+	return( $supports_options );
+}
+
+/**
+ * Implement "oik_post_type_supports" for oik-types
+ *
+ * oik_cpt_oik_post_type_supports_unknown_registered() 
+ * can find the post type supports that have been registered
  * but there's no way of knowing what post type supports could be available.
  * 
  * Until other plugins respond to this filter we'll add the ones we know about: 
+ 
  * - home ( oik-types )
  * - publicize ( Jetpack, oik-clone )
  * - genesis-seo ( Genesis Framework )
@@ -579,6 +588,24 @@ function oik_cpt_oik_post_type_supports( $supports_options ) {
 	$supports_options[ 'genesis-cpt-archives-settings' ] = "Genesis CPT archives settings";
 	bw_trace2( $supports_options, "supports_options" );
 	return( $supports_options );	
+}
+
+/**
+ * Implement "oik_post_type_supports" to add any remaining registered ones
+ *
+ * @param array $supports_options
+ * @return array Updated with the 'unknown' values
+ */
+function oik_cpt_oik_post_type_supports_unknown_registered( $supports_options ) {
+	global $_wp_post_type_features;
+	foreach ( $_wp_post_type_features as $post_type => $features ) {
+		foreach ( $features as $key => $value ) {
+			if ( !isset( $supports_options[ $key ] ) ) {
+				$supports_options[ $key ] = $key;
+			}
+		}
+	}
+	return( $supports_options );
 }
 
 /**
