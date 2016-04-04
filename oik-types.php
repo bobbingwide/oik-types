@@ -4,12 +4,12 @@ Plugin Name: oik-types
 Plugin URI: http://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 1.9.0
+Version: 1.9.1
 Author: bobbingwide
 Author URI: http://www.oik-plugins.com//author/bobbingwide
 License: GPL2
 
-    Copyright 2013-2015 Bobbing Wide (email : herb@bobbingwide.com )
+    Copyright 2013-2016 Bobbing Wide (email : herb@bobbingwide.com )
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License version 2,
@@ -26,6 +26,8 @@ License: GPL2
     http://www.gnu.org/licenses/gpl-2.0.html
 
 */
+
+oikcpt_plugin_loaded();
 
 /**
  * Implement "oik_fields_loaded" for oik-types
@@ -48,6 +50,10 @@ function oikcpt_fields_loaded() {
  * - bw_register_post_type() requires "singular_label" in order to create "singular_name"
  * - Sometimes we need to cast stdObject to an array
  * - "on" is used as the checkbox representation of true.
+ *
+ * @param array $data_args - 
+ * @param bool $cast
+ * @return array $args
  */
 function oikcpt_adjust_args( $data_args, $cast=true ) {
   $args = array();
@@ -402,7 +408,34 @@ function oikcpt_plugin_loaded() {
   add_action( "oik_admin_menu", "oikcpt_admin_menu" );
   add_action( "admin_notices", "oik_types_activation" );
   add_filter( "pre_get_posts", "oik_types_pre_get_posts" );
+	add_filter( "register_post_type_args", "oik_types_register_post_type_args", 10, 2 );
 }
 
-oikcpt_plugin_loaded();
+/**
+ * Implement "register_post_type_args" filter for oik-types
+ *
+ * The 'register_post_type_args filter was introduced in WordPress 4.4
+ * If the site it 4.4 or higher then this gets invoked for each post type being registered
+ * So we can update the registration earlier rather than later.
+ *
+ * @param array $args post type args
+ * @param string $post_type the post type being registered
+ * @return array updated post type args array
+ */
+function oik_types_register_post_type_args( $args, $post_type ) {
+	static $bw_types = null;
+	if ( !$bw_types ) {
+		$bw_types = get_option( "bw_types" );
+		bw_trace2( $bw_types, "bw_types", true, BW_TRACE_DEBUG );
+	}
+	if ( $bw_types ) { // && is_array( $bw_types) && count( $bw_types ) )
+		$oik_types_override = bw_array_get( $bw_types, $post_type, null );
+		if ( $oik_types_override ) {
+			$override_args = oikcpt_adjust_args( $oik_types_override['args'] );
+			$args = $override_args;
+		}
+	}	
+	return( $args );
+}
+
 
