@@ -315,7 +315,9 @@ function oik_types_activation() {
  * i.e. The home page, as opposed to the front page.
  *
  * Notes: 
- * - You can't check for main query in "pre_get_posts"!
+ * - You can't check for main query in "pre_get_posts" 
+ * - You can't use WP_Query::is_main_query() either
+ * - You can't check is_home() in pre_get_posts for other reasons
  * - Assumes that the "post" post type, for blog posts, will always be included.
  * - Once we've run the main query we don't need this filter any more.
  
@@ -324,24 +326,23 @@ function oik_types_activation() {
  * @return WP_Query - the updated query object 
  */
 function oik_types_pre_get_posts( $query ) {
-  //bw_trace2();
-  if ( is_home() && false == $query->get('suppress_filters') ) {
-    $post_types = array( "post" );
-    global $wp_post_types;
-    foreach ( $wp_post_types as $post_type => $data ) {
-      $supports = post_type_supports( $post_type, "home" );
-      if ( $supports ) {
-        $post_types[] = $post_type;
-        if ( $post_type == "attachment" ) {
-          add_filter( "posts_where", "oik_types_posts_where", 10, 2);
-        }
-      }
-      
-    }
-    $query->set( 'post_type', $post_types );
-    remove_filter( "pre_get_posts", "oik_types_pre_get_posts" );
-  }
-  return( $query );
+		//bw_trace2();
+	if ( is_home() && false == $query->get('suppress_filters') ) {
+		$post_types = array( "post" );
+		global $wp_post_types;
+		foreach ( $wp_post_types as $post_type => $data ) {
+			$supports = post_type_supports( $post_type, "home" );
+			if ( $supports ) {
+				$post_types[] = $post_type;
+				if ( $post_type == "attachment" ) {
+					add_filter( "posts_where", "oik_types_posts_where", 10, 2);
+				}
+			}
+		}
+		$query->set( 'post_type', $post_types );
+		remove_filter( "pre_get_posts", "oik_types_pre_get_posts" );
+	}
+	return( $query );
 }
 
 /**
