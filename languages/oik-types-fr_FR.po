@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the oik-types package.
 msgid ""
 msgstr ""
-"Project-Id-Version: oik-types 1.9\n"
+"Project-Id-Version: oik-types 1.9.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/oik-types\n"
-"POT-Creation-Date: 2015-07-21 09:30:42+00:00\n"
+"POT-Creation-Date: 2015-08-31 16:15:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "Language: fr_FR\n"
