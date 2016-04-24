@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2013,2014
+<?php // (C) Copyright Bobbing Wide 2013-2016
 
 /**
  * Lazy implementation for "oik-types" admin menu
@@ -23,10 +23,12 @@ function oikcpt_lazy_admin_menu() {
 
 /**
  * Return a list of registered post_types
+ * 
+ * @return array Registered post types
  */
 function bw_list_registered_post_types() {
   $types = get_post_types();
-  bw_trace2( $types );
+  bw_trace2( $types, "types", false, BW_TRACE_VERBOSE );
   return( $types );
 }
 
