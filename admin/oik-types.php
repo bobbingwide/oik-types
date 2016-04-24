@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2013-2015
+<?php // (C) Copyright Bobbing Wide 2013-2016
 
 /**
  * oik-types - Custom Post Types page
@@ -294,6 +294,9 @@ function _oik_cpt_type_validate( $add_type=true ) {
   $bw_type['args']['rewrite'] = bw_array_get( $_REQUEST, "rewrite", null );
   
   $bw_type['args']['supports'] = bw_array_get( $_REQUEST, "supports", null );
+	
+	$bw_type['args']['archive_sort'] = bw_array_get( $_REQUEST, "archive_sort", null );
+	$bw_type['args']['archive_posts_per_page'] = bw_array_get( $_REQUEST, "archive_posts_per_page", null );
 
   bw_trace2( $bw_type, "bw_type" );
   
@@ -498,6 +501,8 @@ function oik_cpt_edit_type_fields( $bw_type ) {
   //bw_checkbox( "", "", $bw_type['args'][""] ); 
   //bw_checkbox( "", "", $bw_type['args'][""] ); 
   oik_cpt_edit_supports( $bw_type['args']['supports'] );
+	bw_textfield( "archive_sort", 30, "Archive sort", bw_array_get( $bw_type['args'], "archive_sort", null ) );
+	bw_textfield( "archive_posts_per_page", 4, "Archive posts per page", bw_array_get( $bw_type['args'], "archive_posts_per_page", null ) );
   
 }
 

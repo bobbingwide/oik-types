@@ -50,28 +50,38 @@ function oikcpt_fields_loaded() {
  * - bw_register_post_type() requires "singular_label" in order to create "singular_name"
  * - Sometimes we need to cast stdObject to an array
  * - "on" is used as the checkbox representation of true.
+ * - we only set args to false if the field's is in the original array
  *
+ 
  * @param array $data_args - 
  * @param bool $cast
+ * @param array $original_args 
  * @return array $args
  */
-function oikcpt_adjust_args( $data_args, $cast=true ) {
-  $args = array();
-  foreach ( $data_args as $key => $data ) {
-     if ( $cast && is_object( $data )) {
-       $data = (array) $data;
-     }
-     if ( $data == "on" ) {
-       $data = true;
-     }
-     if ( $key == "singular_name" ) {
-       $key = "singular_label";
-     }
-     //bw_trace2( $data, "data", false );  
-     $args[$key] = $data;
-  }
-  return( $args );
-} 
+function oikcpt_adjust_args( $data_args, $cast=true, $original_args=array() ) {
+	$args = array();
+	foreach ( $data_args as $key => $data ) {
+		if ( $cast && is_object( $data )) {
+			$data = (array) $data;
+		}
+		if ( $data == "on" ) {
+			$data = true;
+		}
+		if ( $key == "singular_name" ) {
+			$key = "singular_label";
+		}
+		//bw_trace2( $data, "data", false );  
+		if ( $data ) {
+			$args[$key] = $data;
+		} else {
+			if ( isset( $original_args[$key] ) && is_bool( $original_args[$key ] ) ) {
+				$args[$key] = false;
+			}
+		}
+	}
+	bw_trace2( $args, "args", true, BW_TRACE_VERBOSE );
+	return( $args );
+}
 
 /**
  * Register or update a custom post type
@@ -397,6 +407,8 @@ function oik_types_nav_menu_meta_box_object( $object=null ) {
 
 /**
  * Function performed when oik-types.php is loaded 
+ * 
+ * 
  */
 function oikcpt_plugin_loaded() {
   //bw_trace2();
@@ -407,7 +419,21 @@ function oikcpt_plugin_loaded() {
   add_action( "oik_fields_loaded", "oikx2t_fields_loaded", 15 );
   add_action( "oik_admin_menu", "oikcpt_admin_menu" );
   add_action( "admin_notices", "oik_types_activation" );
-  add_filter( "pre_get_posts", "oik_types_pre_get_posts" );
+  add_action( "pre_get_posts", "oik_types_pre_get_posts" );
+	add_action( "pre_get_posts", "oik_types_pre_get_posts_for_archive", 11 );
+	add_filter( "posts_orderby", "oik_types_posts_orderby", 10, 2 ); 
+	add_action( "setup_theme", "oik_types_setup_theme" );
+}
+
+/**
+ * Implement "setup_theme" for oik-types
+ *
+ * Defer registering our hook for 'register_post_type_args' since we need to ensure that $wp_rewrite
+ * has been initialised. 
+ * 
+ * See TRAC 36579
+ */
+function oik_types_setup_theme() {
 	add_filter( "register_post_type_args", "oik_types_register_post_type_args", 10, 2 );
 }
 
@@ -423,6 +449,7 @@ function oikcpt_plugin_loaded() {
  * @return array updated post type args array
  */
 function oik_types_register_post_type_args( $args, $post_type ) {
+	//bw_backtrace();
 	static $bw_types = null;
 	if ( !$bw_types ) {
 		$bw_types = get_option( "bw_types" );
@@ -431,11 +458,79 @@ function oik_types_register_post_type_args( $args, $post_type ) {
 	if ( $bw_types ) { // && is_array( $bw_types) && count( $bw_types ) )
 		$oik_types_override = bw_array_get( $bw_types, $post_type, null );
 		if ( $oik_types_override ) {
-			$override_args = oikcpt_adjust_args( $oik_types_override['args'] );
+			$override_args = oikcpt_adjust_args( $oik_types_override['args'], true, $args );
 			$args = $override_args;
 		}
 	}	
 	return( $args );
 }
+
+/**
+ * Implement "pre_get_posts" action for oik-types for archive pages
+ *
+ * There should be no need to access "bw_types" since the fields should
+ * already have been copied to the post_type definition. 
+ * Confirm this! 
+ * 
+ * 
+ * 
+ */
+function oik_types_pre_get_posts_for_archive( $query ) {
+	if ( $query->is_main_query() ) {
+	
+		if ( $query->is_archive() ) { 
+			$post_type = bw_array_get( $query->query, 'post_type', "post" );
+			
+			bw_trace2( $post_type, "post_type");
+			$post_type_object = get_post_type_object( $post_type );
+			bw_trace2( $post_type_object, "post_type_object", false );
+			if ( property_exists( $post_type_object, "archive_posts_per_page" ) ) {
+        $archive_posts_per_page = $post_type_object->archive_posts_per_page;
+				if ( $archive_posts_per_page ) {
+					$query->set( 'posts_per_page', $archive_posts_per_page );
+				}
+			}
+			//gob();
+			
+			/*
+			switch ( $query->query['post_type'] ) {
+	
+				case "oik-plugins":
+					//gob();
+					break;
+				
+				default: 
+					$query->set( 'posts_per_page', 50 );
+			}	
+			*/
+		} else {
+		}	
+	}	
+}
+
+/**
+ * Order archives by post title  
+ * 
+ * @TODO Consider what to do for "posts"
+ *
+ * @param string $orderby - current value of orderby
+ * @param object $query - a WP_Query object
+ * @return string the orderby we want
+ */
+function oik_types_posts_orderby( $orderby, $query ) {
+	bw_backtrace();
+	bw_trace2();
+	global $wpdb;
+	if ( $query->is_post_type_archive ) {
+		$orderby = "$wpdb->posts.post_title asc";  
+	}
+	
+	
+	//$post_type = $query->query['post_type'];
+	//bw_trace2( $post_type, "post_type" );
+	
+	return( $orderby );
+}
+
 
 
