@@ -509,7 +509,7 @@ function oik_types_pre_get_posts_for_archive( $query ) {
 }
 
 /**
- * Order archives by post title  
+ * Order front-end archives by post title  
  * 
  * @TODO Consider what to do for "posts"
  *
@@ -521,14 +521,13 @@ function oik_types_posts_orderby( $orderby, $query ) {
 	bw_backtrace();
 	bw_trace2();
 	global $wpdb;
-	if ( $query->is_post_type_archive ) {
-		$orderby = "$wpdb->posts.post_title asc";  
+	if ( !is_admin() ) {
+		if ( $query->is_post_type_archive() ) {
+			$orderby = "$wpdb->posts.post_title asc";
+		}
 	}
-	
-	
 	//$post_type = $query->query['post_type'];
 	//bw_trace2( $post_type, "post_type" );
-	
 	return( $orderby );
 }
 
