@@ -3,8 +3,8 @@ Contributors: bobbingwide
 Donate link: http://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 3.9
-Tested up to: 4.3
-Stable tag: 1.9.0
+Tested up to: 4.5.2
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,15 +84,11 @@ The following field types are provided by the plugins listed below:
 * rating  - oik-rating
 * userref - oik-user
 
-= What is oik-fields dependent upon? =
-This plugin is dependent upon the oik base plugin. It specifically includes the following files:
-
-  oik_require( "includes/bw_register.inc" );
-  oik_require( "bw_metadata.inc" );
-  oik_require2( "includes/bw_fields.inc", "oik-fields", "oik" ); // When required! 
-  
+= What is oik-types dependent upon? =
+This plugin is dependent upon the oik-fields plugin and the oik base plugin. 
+ 
 = Can I get support? = 
-Yes. Through the oik-plugins website.
+Yes. Through the oik-plugins website or GitHub.
 
 = Can this plugin be used with other CPT managers? = 
 Yes, it can. But I wouldn't recommend it.
@@ -112,6 +108,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
+= 1.9.1 = 
+Tested with WordPress 4.5.2
+
 = 1.9.0 = 
 Upgrade for WordPress 4.3
 
@@ -147,6 +146,16 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 1.9.1 = 
+* Added: Improve support for the multi-select "post_type_support" select box [github bobbingwide oik-types issue 2]
+* Added: Language files, though they may be out of date
+* Added: Order by capability for the front-end. Note: this is only a partial solution
+* Added: Respond to 'register_post_types_args' filter [github bobbingwide oik-types issue 3]
+* Added: Workaround for WordPress TRAC 36579
+* Added: posts_per_page for the front-end
+* Changed: Trace levels, whitespace and docblocks
+* Tested: With WordPress 4.5.2 and WordPress MultiSite
+
 = 1.9.0 = 
 * Fixed: Applied a workaround to overcome problems raised as WordPress TRAC #33543.
 * Tested: with WordPress 4.3
