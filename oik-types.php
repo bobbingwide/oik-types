@@ -4,7 +4,7 @@ Plugin Name: oik-types
 Plugin URI: http://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 1.9.1
+Version: 1.9.2
 Author: bobbingwide
 Author URI: http://www.oik-plugins.com//author/bobbingwide
 License: GPL2
@@ -50,11 +50,12 @@ function oikcpt_fields_loaded() {
  * - bw_register_post_type() requires "singular_label" in order to create "singular_name"
  * - Sometimes we need to cast stdObject to an array
  * - "on" is used as the checkbox representation of true.
- * - we only set args to false if the field's is in the original array
+ * - we only set args to false if the field is in the original array
  *
+ * @TODO Determine when 'sometimes' is!
  
  * @param array $data_args - 
- * @param bool $cast
+ * @param bool $cast - true when we need to cast objects to arrays
  * @param array $original_args 
  * @return array $args
  */
@@ -92,14 +93,17 @@ function oikcpt_adjust_args( $data_args, $cast=true, $original_args=array() ) {
  * @param array $data - registration information from the bw_types options array
  */
 function oikcpt_register_post_type( $type, $data ) {
-  //bw_trace2();
-  $args = oikcpt_adjust_args( $data["args"], true );
-  $type_exists = post_type_exists( $type ); 
-  if ( $type_exists ) {
-    bw_update_post_type( $type, $args ); 
-  } else {
-    bw_register_post_type( $type, $args );
-  }  
+	$args = oikcpt_adjust_args( $data["args"], true );
+	$type_exists = post_type_exists( $type ); 
+	if ( $type_exists ) {
+		bw_update_post_type( $type, $args ); 
+	} else {
+		if ( isset( $args['cap'] ) ) {
+			$args['capabilities'] = $args['cap'];
+			unset( $args['cap'] ) ;
+		}
+		bw_register_post_type( $type, $args );
+	}  
 }
 
 /**
@@ -125,7 +129,7 @@ function bw_update_archive_stuff( $type, $value ) {
  */
 function bw_update_post_type_supports( $type, $value ) {
   global $_wp_post_type_features;
-  //bw_trace2( $_wp_post_type_features[$type] );
+  //bw_trace2( $_wp_post_type_features[$type], "pft before", true, BW_TRACE_VERBOSE );
   $features = get_all_post_type_supports( $type );
   //bw_trace2( $features, "features", false );
   if ( count( $features) ) {
@@ -135,7 +139,7 @@ function bw_update_post_type_supports( $type, $value ) {
     }
   }    
   add_post_type_support( $type, $value );
-  //bw_trace2( $_wp_post_type_features[$type], "ptf after", false );
+  //bw_trace2( $_wp_post_type_features[$type], "ptf after", false, BW_TRACE_VERBOSE );
 }
 
 /**
@@ -178,7 +182,7 @@ function bw_update_post_type( $type, $args ) {
 			$post_type_object->$key = $value;
 		}
 	}
-	//bw_trace2( $post_type_object, "after", false );
+	//bw_trace2( $post_type_object, "post_type_object after", false );
 } 
 
 /**
@@ -458,7 +462,8 @@ function oik_types_register_post_type_args( $args, $post_type ) {
 	if ( $bw_types ) { // && is_array( $bw_types) && count( $bw_types ) )
 		$oik_types_override = bw_array_get( $bw_types, $post_type, null );
 		if ( $oik_types_override ) {
-			$override_args = oikcpt_adjust_args( $oik_types_override['args'], true, $args );
+			$override_args = oikcpt_adjust_args( $oik_types_override['args'], false, $args );
+			bw_trace2( $override_args, "override_args", true, BW_TRACE_VERBOSE );
 			$args = $override_args;
 		}
 	}	
