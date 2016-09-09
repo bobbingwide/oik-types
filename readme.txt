@@ -3,8 +3,8 @@ Contributors: bobbingwide
 Donate link: http://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 3.9
-Tested up to: 4.5.2
-Stable tag: 1.9.1
+Tested up to: 4.6
+Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
+= 1.9.2 = 
+Tested with WordPress 4.6 and REST API v2.
+
 = 1.9.1 = 
 Tested with WordPress 4.5.2
 
@@ -146,6 +149,10 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 1.9.2 =
+* Changed: Support for WordPress 4.6 [github bobbingwide oik-types issue 4]
+* Changed: Don't prevent programmed registrations requiring REST API support [github bobbingwide oik-types issue 5]
+
 = 1.9.1 = 
 * Added: Improve support for the multi-select "post_type_support" select box [github bobbingwide oik-types issue 2]
 * Added: Language files, though they may be out of date

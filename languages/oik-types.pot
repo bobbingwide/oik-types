@@ -1,18 +1,39 @@
-# Copyright (C) 2015 oik-types
+# Copyright (C) 2016 oik-types
 # This file is distributed under the same license as the oik-types package.
 msgid ""
 msgstr ""
-"Project-Id-Version: oik-types 1.8\n"
+"Project-Id-Version: oik-types 1.9.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/oik-types\n"
-"POT-Creation-Date: 2015-06-18 09:57:37+00:00\n"
+"POT-Creation-Date: 2016-08-01 14:27:12+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: admin/oik-f2t.php:21 admin/oik-types-admin.php:45
+#: admin/oik-activation.php:21
+msgid "Install"
+msgstr ""
+
+#: admin/oik-activation.php:50
+msgid "Activate"
+msgstr ""
+
+#: admin/oik-activation.php:75
+msgid " Upgrade"
+msgstr ""
+
+#: admin/oik-activation.php:193
+msgid "%1$s may not be fully functional."
+msgstr ""
+
+#: admin/oik-activation.php:195
+msgid ""
+"Please install and activate the required minimum version of this plugin:"
+msgstr ""
+
+#: admin/oik-f2t.php:21 admin/oik-types-admin.php:47
 msgid "Fields to Types"
 msgstr ""
 
@@ -47,12 +68,12 @@ msgid "Field"
 msgstr ""
 
 #: admin/oik-f2t.php:287 admin/oik-fields.php:449 admin/oik-taxonomies.php:333
-#: admin/oik-types.php:575 admin/oik-x2t.php:283
+#: admin/oik-types.php:662 admin/oik-x2t.php:283
 msgid "Preview not yet implemented"
 msgstr ""
 
 #: admin/oik-fields.php:24 admin/oik-types-admin.php:18
-#: admin/oik-types-admin.php:43
+#: admin/oik-types-admin.php:45
 msgid "Fields"
 msgstr ""
 
@@ -74,6 +95,7 @@ msgstr ""
 
 #: admin/oik-fields.php:283 admin/oik-fields.php:429
 #: admin/oik-taxonomies.php:297 admin/oik-taxonomies.php:317
+#: admin/oik-types.php:560
 msgid "Title"
 msgstr ""
 
@@ -118,7 +140,7 @@ msgid "[oik] Types"
 msgstr ""
 
 #: admin/oik-types-admin.php:15 admin/oik-types-admin.php:17
-#: admin/oik-types-admin.php:42
+#: admin/oik-types-admin.php:44
 msgid "Types"
 msgstr ""
 
@@ -138,7 +160,7 @@ msgstr ""
 msgid "oik taxonomies"
 msgstr ""
 
-#: admin/oik-types-admin.php:19 admin/oik-types-admin.php:44
+#: admin/oik-types-admin.php:19 admin/oik-types-admin.php:46
 msgid "Taxonomies"
 msgstr ""
 
@@ -158,11 +180,11 @@ msgstr ""
 msgid "Taxonomies to types"
 msgstr ""
 
-#: admin/oik-types-admin.php:41 admin/oik-types.php:21 admin/oik-types.php:68
+#: admin/oik-types-admin.php:43 admin/oik-types.php:21 admin/oik-types.php:68
 msgid "types"
 msgstr ""
 
-#: admin/oik-types-admin.php:46 admin/oik-x2t.php:21
+#: admin/oik-types-admin.php:48 admin/oik-x2t.php:21
 msgid "Taxonomies to Types"
 msgstr ""
 
@@ -178,20 +200,68 @@ msgstr ""
 msgid "Type must not be blank"
 msgstr ""
 
-#: admin/oik-types.php:358
+#: admin/oik-types.php:361
 msgid "Post type"
 msgstr ""
 
-#: admin/oik-types.php:359 admin/oik-types.php:556
+#: admin/oik-types.php:362 admin/oik-types.php:643
 msgid "Plural label"
 msgstr ""
 
-#: admin/oik-types.php:361 admin/oik-types.php:558
+#: admin/oik-types.php:364 admin/oik-types.php:645
 msgid "Singular label"
 msgstr ""
 
-#: admin/oik-types.php:362 admin/oik-types.php:559
+#: admin/oik-types.php:365 admin/oik-types.php:646
 msgid "Description"
+msgstr ""
+
+#: admin/oik-types.php:504
+msgid "Archive sort"
+msgstr ""
+
+#: admin/oik-types.php:505
+msgid "Archive posts per page"
+msgstr ""
+
+#: admin/oik-types.php:550
+msgid "Author"
+msgstr ""
+
+#: admin/oik-types.php:551
+msgid "Comments"
+msgstr ""
+
+#: admin/oik-types.php:552
+msgid "Custom fields"
+msgstr ""
+
+#: admin/oik-types.php:553
+msgid "Content editor"
+msgstr ""
+
+#: admin/oik-types.php:554
+msgid "Excerpt"
+msgstr ""
+
+#: admin/oik-types.php:555
+msgid "Page attributes"
+msgstr ""
+
+#: admin/oik-types.php:556
+msgid "Post formats"
+msgstr ""
+
+#: admin/oik-types.php:557
+msgid "Revisions"
+msgstr ""
+
+#: admin/oik-types.php:558
+msgid "Thumbnail - featured image"
+msgstr ""
+
+#: admin/oik-types.php:559
+msgid "Trackbacks"
 msgstr ""
 
 #: admin/oik-x2t.php:72
