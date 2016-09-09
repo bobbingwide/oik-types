@@ -158,7 +158,7 @@ function bw_update_post_type_supports( $type, $value ) {
  */
 function bw_update_post_type( $type, $args ) {
 	$post_type_object = get_post_type_object( $type );
-	//bw_trace2();
+	//bw_trace2( $post_type_object, "post_type_object before", true );
 	foreach ( $args as $key => $value ) {
 		if ( $key == "labels" ) {
 			continue;
@@ -464,7 +464,7 @@ function oik_types_register_post_type_args( $args, $post_type ) {
 		if ( $oik_types_override ) {
 			$override_args = oikcpt_adjust_args( $oik_types_override['args'], false, $args );
 			bw_trace2( $override_args, "override_args", true, BW_TRACE_VERBOSE );
-			$args = $override_args;
+			$args = array_merge( $args, $override_args );
 		}
 	}	
 	return( $args );
