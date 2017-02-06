@@ -9,7 +9,7 @@ Author: bobbingwide
 Author URI: http://www.oik-plugins.com//author/bobbingwide
 License: GPL2
 
-    Copyright 2013-2016 Bobbing Wide (email : herb@bobbingwide.com )
+    Copyright 2013-2017 Bobbing Wide (email : herb@bobbingwide.com )
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License version 2,
@@ -378,12 +378,12 @@ function oik_types_pre_get_posts( $query ) {
  * `
  * 
  * @param string $where - the current where clause
- * @param array $this - 
+ * @param array $this_parm - 
  * @return string the updated where clause
  */
-function oik_types_posts_where( $where, $this ) {
+function oik_types_posts_where( $where, $this_parm ) {
   $where = str_replace( "= 'publish'", "IN ( 'publish', 'inherit' )", $where );
-  //bw_trace2();
+  bw_trace2();
   return( $where );
 }
 
