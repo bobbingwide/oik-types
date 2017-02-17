@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2013-2016
+<?php // (C) Copyright Bobbing Wide 2013-2017
 
 /**
  * oik-types - Custom Post Types page
@@ -576,10 +576,14 @@ function oik_cpt_oik_post_type_supports_core( $supports_options ) {
  * - genesis-scripts ( Genesis Framework )
  * - genesis-layouts ( Genesis Framework )
  * - genesis-cpt-archives-settings ( Genesis Framework )
+ * - genesis-rel-author ( Genesis Framework )
+ * - genesis-entry-meta-before-content ( Genesis Framework )
+ * - genesis-entry-meta-after-content ( Genesis Framework )
  * 
  * Notes: 
  * - genesis-seo may get overridden by WordPress SEO
  * - genesis-cpt-archives-settings required has_archive
+ * - genesis-rel-author ... I have no idea what this is about!
  * 
  * @param array $supports_options
  * @return array updated array
@@ -591,6 +595,10 @@ function oik_cpt_oik_post_type_supports( $supports_options ) {
 	$supports_options[ 'genesis-seo' ] = "Genesis SEO";
 	$supports_options[ 'genesis-scripts' ] = "Genesis scripts";
 	$supports_options[ 'genesis-cpt-archives-settings' ] = "Genesis CPT archives settings";
+	$supports_options[ 'genesis-rel-author' ] = "Genesis rel author ";
+	$supports_options[ 'genesis-entry-meta-before-content' ] = "Genesis entry meta before content";
+	$supports_options[ 'genesis-entry-meta-after-content' ] = "Genesis entry meta after content";
+	
 	bw_trace2( $supports_options, "supports_options" );
 	return( $supports_options );	
 }
