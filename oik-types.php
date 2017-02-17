@@ -518,6 +518,7 @@ function oik_types_pre_get_posts_for_archive( $query ) {
  * Order front-end archives by post title  
  * 
  * @TODO Consider what to do for "posts"
+ * @TODO Use the setting defined for the post type / taxonomy
  *
  * @param string $orderby - current value of orderby
  * @param object $query - a WP_Query object
@@ -529,6 +530,12 @@ function oik_types_posts_orderby( $orderby, $query ) {
 	global $wpdb;
 	if ( !is_admin() ) {
 		if ( $query->is_post_type_archive() ) {
+			$orderby = "$wpdb->posts.post_title asc";
+		}
+		if ( $query->is_tax() ) {
+			$orderby = "$wpdb->posts.post_title asc";
+		}
+		if ( $query->is_category() ) {
 			$orderby = "$wpdb->posts.post_title asc";
 		}
 	}
