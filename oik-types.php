@@ -383,7 +383,7 @@ function oik_types_pre_get_posts( $query ) {
  */
 function oik_types_posts_where( $where, $this_parm ) {
   $where = str_replace( "= 'publish'", "IN ( 'publish', 'inherit' )", $where );
-  bw_trace2();
+  //bw_trace2();
   return( $where );
 }
 
@@ -427,6 +427,7 @@ function oikcpt_plugin_loaded() {
 	add_action( "pre_get_posts", "oik_types_pre_get_posts_for_archive", 11 );
 	add_filter( "posts_orderby", "oik_types_posts_orderby", 10, 2 ); 
 	add_action( "setup_theme", "oik_types_setup_theme" );
+	add_action( "run_oik-types.php", "oik_types_run_oik_types" );
 }
 
 /**
@@ -534,6 +535,15 @@ function oik_types_posts_orderby( $orderby, $query ) {
 	//$post_type = $query->query['post_type'];
 	//bw_trace2( $post_type, "post_type" );
 	return( $orderby );
+}
+
+/**
+ * Run "oik-types.php" in batch
+ */
+function oik_types_run_oik_types() {
+	oik_require( "admin/oik-types-cli.php", "oik-types" );
+	oik_types_lazy_run_oik_types();
+		
 }
 
 
