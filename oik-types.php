@@ -478,40 +478,131 @@ function oik_types_register_post_type_args( $args, $post_type ) {
  * already have been copied to the post_type definition. 
  * Confirm this! 
  * 
- * 
- * 
+ * @param object $query Instance of WP_Query
  */
 function oik_types_pre_get_posts_for_archive( $query ) {
 	if ( $query->is_main_query() ) {
 	
 		if ( $query->is_archive() ) { 
-			$post_type = bw_array_get( $query->query, 'post_type', "post" );
-			
-			bw_trace2( $post_type, "post_type");
-			$post_type_object = get_post_type_object( $post_type );
-			bw_trace2( $post_type_object, "post_type_object", false );
-			if ( property_exists( $post_type_object, "archive_posts_per_page" ) ) {
-        $archive_posts_per_page = $post_type_object->archive_posts_per_page;
-				if ( $archive_posts_per_page ) {
-					$query->set( 'posts_per_page', $archive_posts_per_page );
-				}
+			$archive_posts_per_page = null;
+			$post_type = bw_array_get( $query->query, 'post_type', null );
+			if ($post_type ) {
+				$archive_posts_per_page = oik_types_get_archive_posts_per_page( $post_type );
+			} elseif ( $query->is_tax() || $query->is_category() ) {
+				$archive_posts_per_page = oik_types_get_archive_posts_per_page_for_taxonomy( $query );
 			}
-			//gob();
 			
-			/*
-			switch ( $query->query['post_type'] ) {
-	
-				case "oik-plugins":
-					//gob();
-					break;
-				
-				default: 
-					$query->set( 'posts_per_page', 50 );
-			}	
-			*/
+			if ( $archive_posts_per_page ) {
+				$query->set( 'posts_per_page', $archive_posts_per_page );
+			}
+			
 		} else {
+			// Not archive so nothing to do.
 		}	
 	}	
+}
+
+/**
+ * Retrieves archive_posts_per_page if set.
+ *
+ * @param string $post_type
+ * @return null|integer
+ */
+function oik_types_get_archive_posts_per_page( $post_type ) {	
+	$archive_posts_per_page = null;
+	//bw_trace2( $post_type, "post_type");
+	$post_type_object = get_post_type_object( $post_type );
+	//bw_trace2( $post_type_object, "post_type_object", false );
+	if ( property_exists( $post_type_object, "archive_posts_per_page" ) ) {
+		$archive_posts_per_page = $post_type_object->archive_posts_per_page;
+	}
+	return( $archive_posts_per_page );
+}
+
+/**
+ * Returns archive_posts_per_page for a taxonomy query
+ *
+ * @TODO Implement logic to determine taxonomy and the post types its associated to
+ * 
+ * @param object $query the WP_Query object
+ * @return null|integer 
+ */
+function oik_types_get_archive_posts_per_page_for_taxonomy( $query ) {
+	$taxonomy_archive_posts_per_page = null;
+	$post_types = oik_types_get_involved_taxonomies_post_types( $query );
+	foreach ( $post_types as $post_type ) {
+		$archive_posts_per_page = oik_types_get_archive_posts_per_page( $post_type );
+		if ( $archive_posts_per_page && $archive_posts_per_page > $taxonomy_archive_posts_per_page ) {
+			$taxonomy_archive_posts_per_page = $archive_posts_per_page;
+		} 
+	}
+	return( $taxonomy_archive_posts_per_page );
+}
+
+/**
+ * Returns array of post_types involved with the taxonomies
+ * 
+ * We know it's a taxonomy query so we find which post types are associated with each taxonomy and return the set.
+ * Note: The WP_Tax_Query object applies to both tags and categories. 
+ 
+     [tax_query] => WP_Tax_Query Object
+        (
+            [queries] => Array
+                (
+                    [0] => Array
+                        (
+                            [taxonomy] => letters
+                            [terms] => Array
+                                (
+                                    [0] => 539
+                                )
+
+                            [field] => slug
+                            [operator] => IN
+                            [include_children] => 1
+                        )
+
+                )
+
+            [relation] => AND
+            [table_aliases:protected] => Array
+                (
+                )
+
+            [queried_terms] => Array
+                (
+                    [letters] => Array
+                        (
+                            [terms] => Array
+                                (
+                                    [0] => 539
+                                )
+
+                            [field] => slug
+                        )
+
+                )
+
+            [primary_table] => 
+            [primary_id_column] => 
+        )
+
+ * 
+ * 
+ * @param object $query WP_Query object
+ * @return array - may be empty
+ */ 
+function oik_types_get_involved_taxonomies_post_types( $query ) {
+	$post_types = array();
+	$queried_terms = $query->tax_query->queried_terms;
+	foreach ( $queried_terms as $taxonomy => $data ) {
+		$taxonomy_object = get_taxonomy( $taxonomy );
+		bw_trace2( $taxonomy_object, "taxonomy_object", false );
+		$post_types += $taxonomy_object->object_type;
+	}
+	bw_trace2( $post_types, "post_types", false );
+
+	return( $post_types );
 }
 
 /**
@@ -525,8 +616,8 @@ function oik_types_pre_get_posts_for_archive( $query ) {
  * @return string the orderby we want
  */
 function oik_types_posts_orderby( $orderby, $query ) {
-	bw_backtrace();
-	bw_trace2();
+	//bw_backtrace();
+	//bw_trace2();
 	global $wpdb;
 	if ( !is_admin() ) {
 		if ( $query->is_post_type_archive() ) {

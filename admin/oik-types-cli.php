@@ -38,19 +38,8 @@ function oik_types_display_post_types() {
  * Displays a post type
  */
 function oik_types_display_post_type( $post_type ) {
-	$archive_posts_per_page = query_archive_posts_per_page( $post_type );
+	$archive_posts_per_page = oik_types_get_archive_posts_per_page( $post_type );
 	echo "$post_type $archive_posts_per_page" . PHP_EOL;
-}
-
-function query_archive_posts_per_page( $post_type ) {
-	$post_type_object = get_post_type_object( $post_type );
-	bw_trace2( $post_type_object, "post_type_object", false );
-	if ( property_exists( $post_type_object, "archive_posts_per_page" ) ) {
-		$archive_posts_per_page = $post_type_object->archive_posts_per_page;
-	} else {
-		$archive_posts_per_page = "";
-	}
-	return( $archive_posts_per_page );
 }
 
 function set_archive_posts_per_page( $post_type, $archive_posts_per_page ) {
