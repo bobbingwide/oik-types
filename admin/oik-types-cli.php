@@ -7,6 +7,12 @@ if ( PHP_SAPI !== "cli" ) {
 
 /** 
  * oik-types CLI
+ * 
+ * Syntax: oikwp oik-types.php
+ * from the oik-types folder
+ * 
+ * @TODO - move the logic in oik_types_set_archive_posts_per_page() to 
+ * somewhere more appropriate. 
  */
 
 
@@ -72,59 +78,18 @@ function oik_types_update_archive_posts_per_page( $post_type, $archive_posts_per
 }
 
 /**
- *
+ * Sets archive_posts_per_page for selected post types
+ * 
+ * Note: It's nice to have a number that's divisible by both 2 and 3. 
  */
 function oik_types_set_archive_posts_per_page() {
-	
-	oik_types_update_archive_posts_per_page( "oik-themes", 21 );
-	oik_types_update_archive_posts_per_page( "oik-plugins", 21 );
-	oik_types_update_archive_posts_per_page( "oik_api", 99 );
-	oik_types_update_archive_posts_per_page( "oik_class", 99 );
-	oik_types_update_archive_posts_per_page( "oik_file", 99 );
-	oik_types_update_archive_posts_per_page( "oik_hook", 99 );
+	oik_types_update_archive_posts_per_page( "oik-themes", 24 );
+	oik_types_update_archive_posts_per_page( "oik-plugins", 24 );
+	oik_types_update_archive_posts_per_page( "oik_api", 102 );
+	oik_types_update_archive_posts_per_page( "oik_class", 102 );
+	oik_types_update_archive_posts_per_page( "oik_file", 102 );
+	oik_types_update_archive_posts_per_page( "oik_hook", 102 );
 	oik_types_update_archive_posts_per_page( "oik_shortcodes", 54 );
- 
-}
-
-/** 
- * Set defaults for archive_posts_per_page
-attachment
-custom_css
-customize_changeset
-download 
-jetpack-portfolio
-nav_menu_item
-oik-faq
-oik-plugins 21
-oik-themes  21
-oik_api 99
-oik_class
-oik_edd_apikey
-oik_file
-oik_hook
-oik_parsed_source
-oik_pluginversion
-oik_premiumversion
-oik_sc_param
-oik_shortcodes
-oik_testimonials
-oik_themeversion
-oik_themiumversion
-oik_todo
-page
-post
-revision
-shortcode_example
- */ 
-function oik_types_posts_per_page_defaults() {
-	$defaults = array( "oik-plugins" 		=> 21 
-									 , "oik-themes" 		=> 21
-									 , "oik_shortcodes" => 50
-									 , "oik-faq" => 21
-									 );
-									 
-									 
-	return( $defaults );
 }
 
 /**
