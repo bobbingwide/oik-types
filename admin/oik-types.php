@@ -18,7 +18,7 @@
  * 
  */
 function oikcpt_lazy_types_do_page() {
-  oik_menu_header( "types", "w100pc" );
+  BW_::oik_menu_header( __( "types", "oik-types" ), "w100pc" );
   $validated = false;
   
   $preview_type = bw_array_get( $_REQUEST, "preview_type", null );
@@ -571,14 +571,10 @@ function oik_cpt_oik_post_type_supports_core( $supports_options ) {
  * Until other plugins respond to this filter we'll add the ones we know about: 
  
  * - home ( oik-types )
- * - publicize ( Jetpack, oik-clone )
- * - genesis-seo ( Genesis Framework )
- * - genesis-scripts ( Genesis Framework )
- * - genesis-layouts ( Genesis Framework )
- * - genesis-cpt-archives-settings ( Genesis Framework )
- * - genesis-rel-author ( Genesis Framework )
- * - genesis-entry-meta-before-content ( Genesis Framework )
- * - genesis-entry-meta-after-content ( Genesis Framework )
+ * - clone ( oik-clone )
+ * - publicize ( Jetpack )
+ * - shortlinks ( Jetpack )
+ * - genesis-* ( Genesis Framework )
  * 
  * Notes: 
  * - genesis-seo may get overridden by WordPress SEO
@@ -589,8 +585,10 @@ function oik_cpt_oik_post_type_supports_core( $supports_options ) {
  * @return array updated array
  */
 function oik_cpt_oik_post_type_supports( $supports_options ) {
-	$supports_options[ 'publicize' ] = "Publicize with Jetpack";
 	$supports_options[ 'home'] = "Display in blog home page";
+	$supports_options[ 'clone' ] = "Clone content";
+	$supports_options[ 'publicize' ] = "Publicize with Jetpack";
+	$supports_options[ 'shortlinks' ] = "Short links";
 	$supports_options[ 'genesis-layouts' ] = "Genesis layouts";
 	$supports_options[ 'genesis-seo' ] = "Genesis SEO";
 	$supports_options[ 'genesis-scripts' ] = "Genesis scripts";
@@ -598,6 +596,8 @@ function oik_cpt_oik_post_type_supports( $supports_options ) {
 	$supports_options[ 'genesis-rel-author' ] = "Genesis rel author ";
 	$supports_options[ 'genesis-entry-meta-before-content' ] = "Genesis entry meta before content";
 	$supports_options[ 'genesis-entry-meta-after-content' ] = "Genesis entry meta after content";
+	$supports_options[ 'genesis-after-entry-widget-area' ] = "Genesis after entry widget area";
+	$supports_options[ 'genesis-adjacent-entry-nav' ] = "Genesis adjacent entry nav";
 	
 	bw_trace2( $supports_options, "supports_options" );
 	return( $supports_options );	
