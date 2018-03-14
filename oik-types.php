@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: oik-types 
-Plugin URI: http://www.oik-plugins.com/oik-plugins/oik-types
+Plugin URI: https://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 1.9.2
+Version: 1.9.3
 Author: bobbingwide
-Author URI: http://www.oik-plugins.com//author/bobbingwide
+Author URI: https://www.oik-plugins.com//author/bobbingwide
 License: GPL2
 
     Copyright 2013-2018 Bobbing Wide (email : herb@bobbingwide.com )
@@ -287,7 +287,7 @@ function oikfie_register_field( $field, $data ) {
 
  */
 function oiktax_register_taxonomy( $taxonomy, $data ) {
-  bw_trace2();
+  //bw_trace2();
   $args = $data["args"];
   $type = bw_array_get( $args, "type", null );
   $label = bw_array_get( $args, "label", null );
@@ -310,21 +310,25 @@ function oikcpt_admin_menu() {
  * Implement "admin_notices" action for oik-types 
  * 
  * Dependency checking for oik-types:
- * Now dependent upon oik v2.1 and oik-fields v1.33
- * Now dependent upon oik v2.2 and oik-fields v1.35
+ 
+ * Version | Dependency
+ * ------- | ---------------
+ * v1.3    | oik v2.1 and oik-fields v1.33
+ * v1.4    | oik v2.2 and oik-fields v1.35
+ * v1.9.3  | oik v3.2.4 and oik-fields v1.50.1
  * 
  */ 
 function oik_types_activation() {
   static $plugin_basename = null;
   if ( !$plugin_basename ) {
     $plugin_basename = plugin_basename(__FILE__);
-    bw_trace2( $plugin_basename );
+    //bw_trace2( $plugin_basename );
     add_action( "after_plugin_row_oik-types/oik-types.php", "oik_types_activation" );   
     if ( !function_exists( "oik_plugin_lazy_activation" ) ) { 
       require_once( "admin/oik-activation.php" );
     }
   }  
-  $depends = "oik:2.2,oik-fields:1.35";
+  $depends = "oik:3.2.4,oik-fields:1.50.1";
   oik_plugin_lazy_activation( __FILE__, $depends, "oik_plugin_plugin_inactive" );
 }
 
@@ -346,7 +350,7 @@ function oik_types_activation() {
  * @return WP_Query - the updated query object 
  */
 function oik_types_pre_get_posts( $query ) {
-		//bw_trace2();
+	//bw_trace2();
 	if ( is_home() && false == $query->get('suppress_filters') ) {
 		$post_types = array( "post" );
 		global $wp_post_types;
@@ -445,8 +449,8 @@ function oik_types_setup_theme() {
 /**
  * Implement "register_post_type_args" filter for oik-types
  *
- * The 'register_post_type_args filter was introduced in WordPress 4.4
- * If the site it 4.4 or higher then this gets invoked for each post type being registered
+ * The `register_post_type_args` filter was introduced in WordPress 4.4.
+ * If the site is 4.4 or higher then this gets invoked for each post type being registered.
  * So we can update the registration earlier rather than later.
  *
  * @param array $args post type args
@@ -564,9 +568,10 @@ function oik_types_get_involved_taxonomies_post_types( $query ) {
 }
 
 /**
- * Order front-end archives by post title  
- * 
- * @TODO Consider what to do for "posts"
+ * Order front-end archives by post title 
+ *
+ * Except when it's posts
+ *  
  * @TODO Use the setting defined for the post type / taxonomy
  *
  * @param string $orderby - current value of orderby
@@ -574,10 +579,10 @@ function oik_types_get_involved_taxonomies_post_types( $query ) {
  * @return string the orderby we want
  */
 function oik_types_posts_orderby( $orderby, $query ) {
-	//bw_backtrace();
-	//bw_trace2();
+	$post_type = bw_array_get( $query->query, 'post_type', null );
+	bw_trace2( $post_type, "post_type", true, BW_TRACE_VERBOSE );
 	global $wpdb;
-	if ( !is_admin() ) {
+	if ( !is_admin() && $post_type ) {
 		if ( $query->is_post_type_archive() ) {
 			$orderby = "$wpdb->posts.post_title asc";
 		}
@@ -588,8 +593,7 @@ function oik_types_posts_orderby( $orderby, $query ) {
 			$orderby = "$wpdb->posts.post_title asc";
 		}
 	}
-	//$post_type = $query->query['post_type'];
-	//bw_trace2( $post_type, "post_type" );
+	//bw_trace2( $orderby, "orderby", false );
 	return( $orderby );
 }
 
@@ -599,7 +603,6 @@ function oik_types_posts_orderby( $orderby, $query ) {
 function oik_types_run_oik_types() {
 	oik_require( "admin/oik-types-cli.php", "oik-types" );
 	oik_types_lazy_run_oik_types();
-		
 }
 
 
