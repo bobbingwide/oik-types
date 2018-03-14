@@ -5,15 +5,14 @@
  *
  * Processing depends on the button that was pressed. There should only be one!
  * 
- * Selection                       Validate? Perform action        Display preview Display add  Display edit Display select list
- * ------------------------------- --------  -------------------   --------------- ------------ ------------ -------------------
- * preview_type                    No        n/a                   Yes             -            -            -
- * delete_type                     No        delete selected type  -               -            -            Yes
- * edit_type                       No        n/a                   -               -            Yes          Yes
- *
- * _oik_cpt_edit_type         Yes       update selected type  -               -            Yes          Yes
- * _oik_cpt_add_type
- * _oik_cpt_add_oik_cpt
+ * Selection              |   Validate? | Perform action       | Display preview | Display add  | Display edit | Display select list
+ * ----------------------- |  --------  | -------------------  | --------------- | ------------ | ------------ | -------------------
+ * preview_type            |        No  | n/a                  | Yes             | -            | -            | -
+ * delete_type             |        No  | delete selected type | -               | -            | -            | Yes
+ * edit_type               |        No  | n/a                  | -               | -            | Yes          | Yes
+ * _oik_cpt_edit_type      |   Yes      | update selected type | -               | -            | Yes          | Yes
+ * _oik_cpt_add_type			 |
+ * _oik_cpt_add_oik_cpt		 |
  * 
  * 
  */
@@ -40,7 +39,7 @@ function oikcpt_lazy_types_do_page() {
   
   
   if ( $preview_type ) {
-    oik_box( NULL, NULL, "Preview", "oik_cpt_preview" );
+    BW_::oik_box( NULL, NULL, __( "Preview", "oik-types" ), "oik_cpt_preview" );
   } 
   
   if ( $delete_type ) { 
@@ -59,15 +58,15 @@ function oikcpt_lazy_types_do_page() {
   }
   
   if ( $oik_cpt_add_type || ( $oik_cpt_add_oik_cpt && !$validated )  ) {
-    oik_box( NULL, NULL, "Add new", "oik_cpt_add_oik_cpt" );
+    BW_::oik_box( NULL, NULL, __( "Add new", "oik-types" ), "oik_cpt_add_oik_cpt" );
   }
   
   if ( $edit_type || $oik_cpt_edit_type || $validated ) {
-    oik_box( null, null, "Edit type", "oik_cpt_edit_type" );
+    BW_::oik_box( null, null, __( "Edit type", "oik-types" ), "oik_cpt_edit_type" );
   }
-  oik_box( NULL, NULL, "types", "oik_cpt_types" );
+  BW_::oik_box( NULL, NULL, __( "types", "oik-types" ) , "oik_cpt_types" );
   //oik_box( NULL, NULL, "registered types", "oik_cpt_registered_types" );
-  oik_box( null, null, "registered types", "oik_cpt_registered_types" );
+  BW_::oik_box( null, null, __( "registered types", "oik-types" ), "oik_cpt_registered_types" );
   oik_menu_footer();
   bw_flush();
 }
@@ -319,7 +318,7 @@ function _oik_cpt_type_validate( $add_type=true ) {
  * Display the table of oik custom post types
  */
 function oik_cpt_types() {
-  p( "" );
+  BW_::p( "" );
   bw_form();
   stag( "table", "widefat" );
   stag( "thead");
@@ -327,7 +326,7 @@ function oik_cpt_types() {
   etag( "thead");
   _oik_cpt_type_table();
   etag( "table" );
-  p( isubmit( "_oik_cpt_add_type", "Add type", null, "button-primary" ) );
+  e( isubmit( "_oik_cpt_add_type", __( "Add type", "oik-types" ), null, "button-primary" ) );
   etag( "form" );
   // bw_flush();
 }
@@ -339,7 +338,7 @@ function oik_cpt_types() {
  * This table includes the oik custom post types.
  */
 function oik_cpt_registered_types() {
-  p( "" );
+  BW_::p( "" );
   bw_form();
   stag( "table", "widefat" );
   stag( "thead");
@@ -504,8 +503,8 @@ function oik_cpt_edit_type_fields( $bw_type ) {
   //bw_checkbox( "", "", $bw_type['args'][""] ); 
   //bw_checkbox( "", "", $bw_type['args'][""] ); 
   oik_cpt_edit_supports( $bw_type['args']['supports'] );
-	bw_textfield( "archive_sort", 30, "Archive sort", bw_array_get( $bw_type['args'], "archive_sort", null ) );
-	bw_textfield( "archive_posts_per_page", 4, "Archive posts per page", bw_array_get( $bw_type['args'], "archive_posts_per_page", null ) );
+	BW_::bw_textfield( "archive_sort", 30, __( "Archive sort", "oik-types" ), bw_array_get( $bw_type['args'], "archive_sort", null ) );
+	BW_::bw_textfield( "archive_posts_per_page", 4, __( "Archive posts per page", "oik-types" ), bw_array_get( $bw_type['args'], "archive_posts_per_page", null ) );
   
 }
 
@@ -526,7 +525,7 @@ function oik_cpt_edit_supports( $supports ) {
 	add_filter( "oik_post_type_supports", "oik_cpt_oik_post_type_supports_unknown_registered", 12 );
 	$supports_options = oik_cpt_get_all_post_type_supports();
 	$count = count( $supports_options );
-  bw_select( "supports", "Supports", $supports, array( "#options" => $supports_options, "#multiple" => $count ) );
+  BW_::bw_select( "supports", __( "Supports", "oik-types" ), $supports, array( "#options" => $supports_options, "#multiple" => $count ) );
 }
 
 /**
@@ -651,13 +650,13 @@ function oik_cpt_edit_type( ) {
   bw_form();
   stag( "table", "wide-fat" );
   bw_tablerow( array( "type", $bw_type['args']['type'] . ihidden( 'type', $bw_type['args']['type']) ) );
-  bw_textfield( "label", 30, "Plural label", stripslashes( $bw_type['args']['label'] ) );
+  BW_::bw_textfield( "label", 30, __( "Plural label", "oik-types" ), stripslashes( $bw_type['args']['label'] ) );
   $singular_name = bw_return_singular_name( $bw_type['args'] ); 
-  bw_textfield( "singular_name", 30, "Singular label", stripslashes( $singular_name ) );
-  bw_textarea( "description", 100, "Description", stripslashes( $bw_type['args']['description'] ), 2 );
+  BW_::bw_textfield( "singular_name", 30, __( "Singular label", "oik-types" ), stripslashes( $singular_name ) );
+  BW_::bw_textarea( "description", 100, __( "Description", "oik-types" ), stripslashes( $bw_type['args']['description'] ), 2 );
   oik_cpt_edit_type_fields( $bw_type );
   etag( "table" );
-  p( isubmit( "_oik_cpt_edit_type", "Change type", null, "button-primary" ) );
+  e( isubmit( "_oik_cpt_edit_type", __( "Change type", "oik-types" ), null, "button-primary" ) );
   etag( "form" );
 }
 

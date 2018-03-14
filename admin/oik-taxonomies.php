@@ -70,7 +70,7 @@ function oiktax_lazy_taxonomies_do_page() {
   }
   
   if ( $edit_taxonomy || $oik_tax_edit_taxonomy || $validated ) {
-    oik_box( null, null, "Edit taxonomy", "oik_tax_edit_taxonomy" );
+    BW_::oik_box( null, null, __( "Edit taxonomy", "oik-types" ), "oik_tax_edit_taxonomy" );
   }
   BW_::oik_box( NULL, NULL, __( "taxonomies", "oik-types" ), "oik_tax_taxonomies" );
   oik_menu_footer();
@@ -289,7 +289,7 @@ function oik_tax_add_oik_tax( ) {
   global $bw_taxonomy;
   bw_form();
   stag( "table", "wide-fat" );
-  bw_textfield( "taxonomy", 32, "Name", $bw_taxonomy['args']['taxonomy'] );
+  BW_::bw_textfield( "taxonomy", 32, __( "Name", "oik-types" ), $bw_taxonomy['args']['taxonomy'] );
   bw_textfield( "label", 32, "Label", $bw_taxonomy['args']['label'] );
   // $taxonomy_types = apply_filters( "oik_query_taxonomy_types", array() );
   $taxonomy_types = oik_tax_query_taxonomy_types();
@@ -315,12 +315,12 @@ function oik_tax_edit_taxonomy( ) {
   $taxonomy_types = oik_tax_query_taxonomy_types();
   $type = bw_array_get( $taxonomy_types, $bw_taxonomy['args']['type'], "&nbsp;" );
   bw_tablerow( array( "Type", $type . ihidden( 'type', $bw_taxonomy['args']['type']) ) );
-  bw_textfield( "label", 32, "Label", stripslashes( $bw_taxonomy['args']['label'] ) );
-  bw_textfield( "title", 100, "Title", stripslashes( $bw_taxonomy['args']['title'] ) );
-	bw_checkbox( "show_in_rest", "Show in REST", bw_array_get(  $bw_taxonomy['args'], 'show_in_rest', null ) );
+  BW_::bw_textfield( "label", 32, __( "Label", "oik-types" ), stripslashes( $bw_taxonomy['args']['label'] ) );
+  BW_::bw_textfield( "title", 100, __( "Title", "oik-types" ), stripslashes( $bw_taxonomy['args']['title'] ) );
+	bw_checkbox( "show_in_rest", __( "Show in REST", "oik-types" ), bw_array_get(  $bw_taxonomy['args'], 'show_in_rest', null ) );
   etag( "table" );
   
-  p( isubmit( "_oik_tax_edit_taxonomy", "Change taxonomy", null, "button-primary" ) );
+  e( isubmit( "_oik_tax_edit_taxonomy", __( "Change taxonomy", "oik-types" ), null, "button-primary" ) );
   etag( "form" );
 }
 
