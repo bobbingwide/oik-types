@@ -287,14 +287,14 @@ function oikfie_register_field( $field, $data ) {
 
  */
 function oiktax_register_taxonomy( $taxonomy, $data ) {
-  //bw_trace2();
+  bw_trace2();
   $args = $data["args"];
   $type = bw_array_get( $args, "type", null );
   $label = bw_array_get( $args, "label", null );
   if ( $type == "tags" ) {
-    bw_register_custom_tags( $taxonomy, null, $label ); 
+    bw_register_custom_tags( $taxonomy, null, $args ); 
   } else { 
-    bw_register_custom_category( $taxonomy, null, $label ); 
+    bw_register_custom_category( $taxonomy, null, $args ); 
   }  
 }
 
