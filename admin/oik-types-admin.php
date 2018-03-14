@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2013-2016
+<?php // (C) Copyright Bobbing Wide 2013-2018
 
 /**
  * Lazy implementation for "oik-types" admin menu

@@ -9,7 +9,7 @@ Author: bobbingwide
 Author URI: http://www.oik-plugins.com//author/bobbingwide
 License: GPL2
 
-    Copyright 2013-2017 Bobbing Wide (email : herb@bobbingwide.com )
+    Copyright 2013-2018 Bobbing Wide (email : herb@bobbingwide.com )
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License version 2,
@@ -458,7 +458,7 @@ function oik_types_register_post_type_args( $args, $post_type ) {
 	static $bw_types = null;
 	if ( !$bw_types ) {
 		$bw_types = get_option( "bw_types" );
-		bw_trace2( $bw_types, "bw_types", true, BW_TRACE_DEBUG );
+		//bw_trace2( $bw_types, "bw_types", true, BW_TRACE_DEBUG );
 	}
 	if ( $bw_types ) { // && is_array( $bw_types) && count( $bw_types ) )
 		$oik_types_override = bw_array_get( $bw_types, $post_type, null );

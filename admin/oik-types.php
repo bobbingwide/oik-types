@@ -291,6 +291,7 @@ function _oik_cpt_type_validate( $add_type=true ) {
   $bw_type['args']['show_in_nav_menus'] = bw_array_get( $_REQUEST, "show_in_nav_menus", null );
   $bw_type['args']['show_in_menu'] = bw_array_get( $_REQUEST, "show_in_menu", null );
   $bw_type['args']['show_in_admin_bar'] = bw_array_get( $_REQUEST, "show_in_admin_bar", null );
+  $bw_type['args']['show_in_rest'] = bw_array_get( $_REQUEST, "show_in_rest", null );
   $bw_type['args']['rewrite'] = bw_array_get( $_REQUEST, "rewrite", null );
   
   $bw_type['args']['supports'] = bw_array_get( $_REQUEST, "supports", null );
@@ -386,6 +387,7 @@ function oik_cpt_add_oik_cpt( ) {
  * Y rewrite
  * Y supports array
  * Y show_in_admin_bar   added 2014/07/11
+ * Y show_in_rest        added 2018/02/02
  * N menu_position
  * N menu_icon
  * N capability_type   default post
@@ -490,6 +492,7 @@ function oik_cpt_edit_type_fields( $bw_type ) {
   bw_checkbox( "show_in_nav_menus", "Show in nav menus", $bw_type['args']["show_in_nav_menus"] ); 
   bw_checkbox( "show_in_menu", "Show in menu", $bw_type['args']["show_in_menu"] ); 
   bw_checkbox( "show_in_admin_bar", "Show in admin bar", bw_array_get( $bw_type['args'], "show_in_admin_bar", true ) ); 
+	bw_checkbox( "show_in_rest", "Show in REST", bw_array_get( $bw_type['args'], "show_in_rest", false ) );
   // bw_checkbox( "rewrite", "Rewrite", $bw_type['args']["rewrite"] ); 
   oik_cpt_edit_rewrite( $bw_type['args']['supports'] ); 
   
