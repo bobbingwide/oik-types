@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2013
+<?php // (C) Copyright Bobbing Wide 2013-2018
 
 /**
  * Lazy implementation for "oik-taxonomies" 
@@ -21,7 +21,7 @@
 */
 
 function oiktax_lazy_taxonomies_do_page() {
-  oik_menu_header( "taxonomies", "w100pc" );
+  BW_::oik_menu_header( __( "taxonomies", "oik-types" ), "w100pc" );
   $validated = false;
   
   $preview_taxonomy = bw_array_get( $_REQUEST, "preview_taxonomy", null );
@@ -72,7 +72,7 @@ function oiktax_lazy_taxonomies_do_page() {
   if ( $edit_taxonomy || $oik_tax_edit_taxonomy || $validated ) {
     oik_box( null, null, "Edit taxonomy", "oik_tax_edit_taxonomy" );
   }
-  oik_box( NULL, NULL, "taxonomies", "oik_tax_taxonomies" );
+  BW_::oik_box( NULL, NULL, __( "taxonomies", "oik-types" ), "oik_tax_taxonomies" );
   oik_menu_footer();
   bw_flush();
 }
@@ -210,6 +210,7 @@ function _oik_tax_taxonomy_validate( $add_taxonomy=true ) {
   $bw_taxonomy['args']['label'] = bw_array_get( $_REQUEST, "label", null );
   ///$bw_taxonomy['args']['required'] = bw_array_get( $_REQUEST, "required", null );
   $bw_taxonomy['args']['title'] = bw_array_get( $_REQUEST, "title", null );
+	$bw_taxonomy['args']['show_in_rest'] = bw_array_get( $_REQUEST, "show_in_rest", null );
   
   bw_trace2( $bw_taxonomy, "bw_taxonomy" );
   
@@ -258,7 +259,7 @@ function bw_register_taxonomy( $taxonomy_name, $taxonomy_type, $taxonomy_title, 
 
  */
 function oik_tax_taxonomies() {
-  p( "" );
+  BW_::p( "" );
   bw_form();
   stag( "table", "widefat" );
   stag( "thead");
@@ -266,7 +267,7 @@ function oik_tax_taxonomies() {
   etag( "thead");
   _oik_tax_taxonomy_table();
   etag( "table" );
-  p( isubmit( "_oik_tax_add_taxonomy", "Add taxonomy", null, "button-primary" ) );
+  e( isubmit( "_oik_tax_add_taxonomy", __( "Add taxonomy", "oik-types" ), null, "button-primary" ) );
   etag( "form" );
 }
 
@@ -295,6 +296,7 @@ function oik_tax_add_oik_tax( ) {
   bw_trace2( $taxonomy_types, "taxonomy_types" );
   bw_select( "type", "Type", null, array( "#options" => $taxonomy_types ) );
   bw_textfield( "title", 100, "Title", stripslashes( $bw_taxonomy['args']['title'] ) );
+	bw_checkbox( "show_in_rest", "Show in REST", $bw_taxonomy['args']['show_in_rest'] );
   etag( "table" );
   
   p( isubmit( "_oik_tax_add_oik_tax", "Add new taxonomy", null, "button-primary" ) );
@@ -315,6 +317,7 @@ function oik_tax_edit_taxonomy( ) {
   bw_tablerow( array( "Type", $type . ihidden( 'type', $bw_taxonomy['args']['type']) ) );
   bw_textfield( "label", 32, "Label", stripslashes( $bw_taxonomy['args']['label'] ) );
   bw_textfield( "title", 100, "Title", stripslashes( $bw_taxonomy['args']['title'] ) );
+	bw_checkbox( "show_in_rest", "Show in REST", bw_array_get(  $bw_taxonomy['args'], 'show_in_rest', null ) );
   etag( "table" );
   
   p( isubmit( "_oik_tax_edit_taxonomy", "Change taxonomy", null, "button-primary" ) );
