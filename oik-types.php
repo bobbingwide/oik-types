@@ -290,7 +290,10 @@ function oiktax_register_taxonomy( $taxonomy, $data ) {
   //bw_trace2();
   $args = $data["args"];
   $type = bw_array_get( $args, "type", null );
-  $label = bw_array_get( $args, "label", null );
+	$args['labels']['name'] = bw_array_get( $args, "label", null );
+	$args['labels']['singular_name'] = bw_array_get( $args, "singular_name", null );
+
+
   if ( $type == "tags" ) {
     bw_register_custom_tags( $taxonomy, null, $args ); 
   } else { 
@@ -315,7 +318,7 @@ function oikcpt_admin_menu() {
  * ------- | ---------------
  * v1.3    | oik v2.1 and oik-fields v1.33
  * v1.4    | oik v2.2 and oik-fields v1.35
- * v1.9.3  | oik v3.2.4 and oik-fields v1.50.1
+ * v1.9.3  | oik v3.2.3 and oik-fields v1.50.1
  * 
  */ 
 function oik_types_activation() {
@@ -328,7 +331,7 @@ function oik_types_activation() {
       require_once( "admin/oik-activation.php" );
     }
   }  
-  $depends = "oik:3.2.4,oik-fields:1.50.1";
+  $depends = "oik:3.2.3,oik-fields:1.50.1";
   oik_plugin_lazy_activation( __FILE__, $depends, "oik_plugin_plugin_inactive" );
 }
 
