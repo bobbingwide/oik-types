@@ -7,18 +7,17 @@
  *
  * Processing depends on the button that was pressed. There should only be one!
  * 
- * Selection                       Validate? Perform action        Display preview Display add  Display edit Display select list
- * ------------------------------- --------  -------------------   --------------- ------------ ------------ -------------------
- * preview_taxonomy                    No        n/a                   Yes             -            -            -
- * delete_taxonomy                     No        delete selected taxonomy  -               -            -            Yes
- * edit_taxonomy                       No        n/a                   -               -            Yes          Yes
- *
- * _oik_tax_edit_taxonomy         Yes       update selected taxonomy  -               -            Yes          Yes
+ * Selection                      | Validate? |Perform action            | Display preview | Display add  | Display edit | Display select list
+ * ------------------------------ |  -------- | -------------------      | --------------- | ------------ | ------------ | -------------------
+ * preview_taxonomy               |     No    | n/a                      | Yes             | -            | -            | -
+ * delete_taxonomy                |     No    | delete selected taxonomy |  -              | -            | -            | Yes
+ * edit_taxonomy                  |     No    | n/a                      |  -              | -            | Yes          | Yes
+ * _oik_tax_edit_taxonomy         |  Yes      | update selected taxonomy |  -              | -            | Yes          | Yes
  * _oik_tax_add_taxonomy
  * _oik_tax_add_oik_tax
  * 
  * 
-*/
+ */
 
 function oiktax_lazy_taxonomies_do_page() {
   BW_::oik_menu_header( __( "taxonomies", "oik-types" ), "w100pc" );
@@ -91,6 +90,9 @@ function _oik_tax_taxonomy_row( $taxonomy, $data ) {
   $type = bw_array_get( $taxonomy_types, $args['type'], "&nbsp;" );
   $row[] = esc_html( stripslashes( $type )) . "&nbsp;";
   $row[] = esc_html( stripslashes( $args['label'] ) ) . "&nbsp;";  
+	$singular_name = bw_return_singular_name( $args );
+  $row[] = esc_html( stripslashes( $singular_name ) ) . "&nbsp";
+
   $row[] = esc_html( stripslashes( $args['title'] ) ) . "&nbsp;";  
   $links = null;
   //$links .= retlink( null, admin_url("admin.php?page=oik_taxonomies&amp;preview_taxonomy=$taxonomy"), "Preview" );
@@ -200,7 +202,7 @@ function oik_diy_validate_taxonomy( &$taxonomy ) {
 }
     
 /**
- 
+ * Validate the Taxonomy fields
  */
 function _oik_tax_taxonomy_validate( $add_taxonomy=true ) {
 
@@ -209,6 +211,7 @@ function _oik_tax_taxonomy_validate( $add_taxonomy=true ) {
   $bw_taxonomy['args']['type'] = bw_array_get( $_REQUEST, "type", null );
   $bw_taxonomy['args']['label'] = bw_array_get( $_REQUEST, "label", null );
   ///$bw_taxonomy['args']['required'] = bw_array_get( $_REQUEST, "required", null );
+  $bw_taxonomy['args']['singular_name'] = bw_array_get( $_REQUEST, "singular_name", null );
   $bw_taxonomy['args']['title'] = bw_array_get( $_REQUEST, "title", null );
 	$bw_taxonomy['args']['show_in_rest'] = bw_array_get( $_REQUEST, "show_in_rest", null );
   
@@ -263,7 +266,7 @@ function oik_tax_taxonomies() {
   bw_form();
   stag( "table", "widefat" );
   stag( "thead");
-  bw_tablerow( array( "Name", "Type", "Label", "Title", "Actions" ));
+  bw_tablerow( array( "Name", "Type", "Label", "Singular", "Title", "Actions" ));
   etag( "thead");
   _oik_tax_taxonomy_table();
   etag( "table" );
@@ -291,6 +294,9 @@ function oik_tax_add_oik_tax( ) {
   stag( "table", "wide-fat" );
   BW_::bw_textfield( "taxonomy", 32, __( "Name", "oik-types" ), $bw_taxonomy['args']['taxonomy'] );
   bw_textfield( "label", 32, "Label", $bw_taxonomy['args']['label'] );
+	
+  $singular_name = bw_return_singular_name( $bw_taxonomy['args'] );
+  bw_textfield( "singular_name", 32, "Singular label", $singular_name );
   // $taxonomy_types = apply_filters( "oik_query_taxonomy_types", array() );
   $taxonomy_types = oik_tax_query_taxonomy_types();
   bw_trace2( $taxonomy_types, "taxonomy_types" );
@@ -316,6 +322,8 @@ function oik_tax_edit_taxonomy( ) {
   $type = bw_array_get( $taxonomy_types, $bw_taxonomy['args']['type'], "&nbsp;" );
   bw_tablerow( array( "Type", $type . ihidden( 'type', $bw_taxonomy['args']['type']) ) );
   BW_::bw_textfield( "label", 32, __( "Label", "oik-types" ), stripslashes( $bw_taxonomy['args']['label'] ) );
+  $singular_name = bw_return_singular_name( $bw_taxonomy['args'] ); 
+  BW_::bw_textfield( "singular_name", 30, __( "Singular label", "oik-types" ), stripslashes( $singular_name ) );
   BW_::bw_textfield( "title", 100, __( "Title", "oik-types" ), stripslashes( $bw_taxonomy['args']['title'] ) );
 	bw_checkbox( "show_in_rest", __( "Show in REST", "oik-types" ), bw_array_get(  $bw_taxonomy['args'], 'show_in_rest', null ) );
   etag( "table" );

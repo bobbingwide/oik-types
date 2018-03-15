@@ -101,3 +101,20 @@ function oikx2t_do_page() {
 }
 
 
+
+/**
+ * Return the singular name for the post_type, if defined
+ */
+function bw_return_singular_name( $args ) {
+  $singular_name = bw_array_get( $args, "singular_name", null );
+  if ( !$singular_name ) {
+    $labels = bw_array_get( $args, 'labels', null );
+    if ( $labels ) {
+      $singular_name = bw_array_get( $labels, "singular_name", null );
+    }  
+  }
+  return( $singular_name );
+}   
+ 
+
+
