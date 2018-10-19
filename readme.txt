@@ -1,9 +1,9 @@
 === oik-types ===
 Contributors: bobbingwide
-Donate link: http://www.oik-plugins.com/oik/oik-donate/
+Donate link: https://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 3.9
-Tested up to: 4.6
+Tested up to: 4.9.8
 Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -108,6 +108,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
+= 2.0.0-alpha-20181019 = 
+Upgrade for PHP 7.2 support
+
 = 1.9.2 = 
 Tested with WordPress 4.6 and REST API v2.
 
@@ -149,6 +152,21 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 2.0.0-alpha-20181019 =
+* Added: Add show_in_rest checkbox [github bobbingwide oik-types issue 13]
+* Changed: Add batch setting of archive_posts_per_page. First version [github bobbingwide oik-types issue 8] 
+* Changed: Add more strings to oik_cpt_oik_post_type_supports [github bobbingwide oik-types issue 14]
+* Changed: Add singular_name to custom taxonomies [github bobbingwide oik-types issue 16]
+* Changed: Add three more post_type_supports values [github bobbingwide oik-types issue 2]
+* Changed: Depends on oik v3.2.3
+* Changed: Don't alter orderby for posts. [github bobbingwide oik-types issue 9]
+* Changed: Eliminate deprecated messages from bw_translate [github bobbingwide oik-types issue 15]
+* Changed: Force orderby title ASC for taxonomy and category queries [github bobbingwide oik-types issue 9]
+* Changed: Pass $args rather than $label in oiktax_register_taxonomy
+* Changed: Set posts_per_page for the main taxonomy archive query [github bobbingwide oik-types issue 9]
+* Changed: Support PHP 7.1 and PHP 7.2 [github bobbingwide oik-types issue 7] 
+* Tested: With WordPress 4.9.8
+
 = 1.9.2 =
 * Changed: Support for WordPress 4.6 [github bobbingwide oik-types issue 4]
 * Changed: Don't prevent programmed registrations requiring REST API support [github bobbingwide oik-types issue 5]

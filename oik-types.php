@@ -4,7 +4,7 @@ Plugin Name: oik-types
 Plugin URI: https://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 1.9.3
+Version: 2.0.0-alpha-20181019
 Author: bobbingwide
 Author URI: https://www.oik-plugins.com//author/bobbingwide
 License: GPL2
