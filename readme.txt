@@ -2,9 +2,9 @@
 Contributors: bobbingwide
 Donate link: https://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
-Requires at least: 3.9
-Tested up to: 4.9.8
-Stable tag: 1.9.2
+Requires at least: 4.9.8
+Tested up to: 5.0.3
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
+= 2.0.0 =
+Upgrade primarily for corrected plugin version.
+
 = 2.0.0-alpha-20181019 = 
 Upgrade for PHP 7.2 support
 
@@ -152,6 +155,12 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 2.0.0 =
+* Fixed: Corrected plugin version
+* Changed: Added some simple PHPUnit tests for issues #5 and 16
+* Tested: With WordPress 5.0.3
+* Tested: With PHP 7.2
+
 = 2.0.0-alpha-20181019 =
 * Added: Add show_in_rest checkbox [github bobbingwide oik-types issue 13]
 * Changed: Add batch setting of archive_posts_per_page. First version [github bobbingwide oik-types issue 8] 
