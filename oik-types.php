@@ -4,9 +4,9 @@ Plugin Name: oik-types
 Plugin URI: https://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 2.0.0
+Version: 2.0.0-beta-20191017
 Author: bobbingwide
-Author URI: https://www.oik-plugins.com//author/bobbingwide
+Author URI: https://www.bobbingwide.com/about-bobbing-wide
 License: GPL2
 
     Copyright 2013-2019 Bobbing Wide (email : herb@bobbingwide.com )
@@ -586,7 +586,7 @@ function oik_types_posts_orderby( $orderby, $query ) {
 	$post_type = bw_array_get( $query->query, 'post_type', null );
 	bw_trace2( $post_type, "post_type", true, BW_TRACE_VERBOSE );
 	global $wpdb;
-	if ( !is_admin() && $post_type ) {
+	if ( !is_admin() && $post_type && $post_type !== 'post' ) {
 		if ( $query->is_post_type_archive() ) {
 			$orderby = "$wpdb->posts.post_title asc";
 		}
