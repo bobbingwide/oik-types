@@ -282,6 +282,7 @@ function _oik_cpt_type_validate( $add_type=true ) {
 	
 	$bw_type['args']['archive_sort'] = bw_array_get( $_REQUEST, "archive_sort", null );
 	$bw_type['args']['archive_posts_per_page'] = bw_array_get( $_REQUEST, "archive_posts_per_page", null );
+	$bw_type['args']['_builtin'] = bw_array_get( $_REQUEST, '_builtin', null );
 
   bw_trace2( $bw_type, "bw_type" );
   
@@ -377,6 +378,7 @@ function oik_cpt_add_oik_cpt( ) {
  * N capability_type   default post
  * N capabilities array default edit, read, delete, edit_posts, edit_others_posts, publish_posts, read_private_posts etcetera
  * N map_meta_cap
+ * Y _builtin   added 2019/1028
  * 
 If you assign a 'capability_type' and then take a look into the $GLOBALS['wp_post_types']['your_cpt_name'] array, then you'll see the following:
 
@@ -448,9 +450,9 @@ query_var
 Default: true - set to $post_type
 'false' - Disables query_var key use. A post type cannot be loaded at /?{query_var}={single_post_slug}
 'string' - /?{query_var_string}={single_post_slug} will work as intended.
-Note: The query_var parameter has no effect if the ‘publicly_queryable’ parameter is set to false. query_var adds the custom post type’s query var to the built-in query_vars array so that WordPress will recognize it. WordPress removes any query var not included in that array.
+Note: The query_var parameter has no effect if the `publicly_queryable` parameter is set to false. query_var adds the custom post type's query var to the built-in query_vars array so that WordPress will recognize it. WordPress removes any query var not included in that array.
 If set to true it allow you to request a custom posts type (book) using this: example.com/?book=life-of-pi
-If set to a string rather than true (for example ‘publication’), you can do: example.com/?publication=life-of-pi
+If set to a string rather than true (for example 'publication'), you can do: example.com/?publication=life-of-pi
 
 can_export
 (boolean) (optional) Can this post_type be exported.
@@ -490,7 +492,7 @@ function oik_cpt_edit_type_fields( $bw_type ) {
   oik_cpt_edit_supports( $bw_type['args']['supports'] );
 	BW_::bw_textfield( "archive_sort", 30, __( "Archive sort", "oik-types" ), bw_array_get( $bw_type['args'], "archive_sort", null ) );
 	BW_::bw_textfield( "archive_posts_per_page", 4, __( "Archive posts per page", "oik-types" ), bw_array_get( $bw_type['args'], "archive_posts_per_page", null ) );
-  
+  bw_checkbox( '_builtin', 'Builtin ( Internal Use )', bw_array_get( $bw_type['args'], '_builtin', false ) );
 }
 
 /**
