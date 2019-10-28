@@ -3,8 +3,8 @@ Contributors: bobbingwide
 Donate link: https://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 5.2.0
-Tested up to: 5.3-RC1
-Stable tag: 2.0.0-beta-20191017
+Tested up to: 5.3-RC2
+Stable tag: 2.0.0-beta-20191028
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
+= 2.0.0-beta-20191028 = 
+Upgrade for support to override _builtin on wp_block post type
+
 = 2.0.0-beta-20191017 =
 Upgrade primarily for corrected plugin version.
 
@@ -155,6 +158,10 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 2.0.0-beta-20191028 = 
+* Changed: Add checkbox to allow oik-types to override the _builtin value,[github bobbingwide oik-types issues 19]
+* Tested: With WordPress 5.3-RC2
+
 = 2.0.0-beta-20191017 =
 * Fixed: Don't adjust orderby when the post_type is explicitly set to 'post',[github bobbingwide issues 9]
 * Changed: Added some simple PHPUnit tests for issues #5 and 16
