@@ -574,7 +574,7 @@ function oik_types_get_involved_taxonomies_post_types( $query ) {
 /**
  * Order front-end archives by post title 
  *
- * Except when it's posts
+ * Except when it's posts or navigation menu items.
  *  
  * @TODO Use the setting defined for the post type / taxonomy
  *
@@ -586,7 +586,7 @@ function oik_types_posts_orderby( $orderby, $query ) {
 	$post_type = bw_array_get( $query->query, 'post_type', null );
 	bw_trace2( $post_type, "post_type", true, BW_TRACE_VERBOSE );
 	global $wpdb;
-	if ( !is_admin() && $post_type && $post_type !== 'post' ) {
+	if ( !is_admin() && $post_type && $post_type !== 'post' && $post_type !== 'nav_menu_item' ) {
 		if ( $query->is_post_type_archive() ) {
 			$orderby = "$wpdb->posts.post_title asc";
 		}
