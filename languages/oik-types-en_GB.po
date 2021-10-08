@@ -1,233 +1,327 @@
-# Copyright (C) 2015 oik-types
+# Copyright (C) 2021 oik-types
 # This file is distributed under the same license as the oik-types package.
 msgid ""
 msgstr ""
-"Project-Id-Version: oik-types 1.9\n"
+"Project-Id-Version: oik-types 2.1.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/oik-types\n"
-"POT-Creation-Date: 2015-07-21 09:30:42+00:00\n"
+"POT-Creation-Date: 2021-10-08 10:29:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 "Language: en_GB\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-#: admin/oik-f2t.php:21 admin/oik-types-admin.php:45
+#: admin/oik-activation.php:29
+msgid "Install %1$s"
+msgstr "Install %1$s"
+
+#: admin/oik-activation.php:61
+msgid "Activate %1$s"
+msgstr "Activate %1$s"
+
+#: admin/oik-activation.php:79
+msgid "Upgrade %1$s"
+msgstr "Upgrade %1$s"
+
+#: admin/oik-activation.php:195
+msgid "version"
+msgstr "version"
+
+#: admin/oik-activation.php:197
+msgid "%1$s may not be fully functional."
+msgstr "%1$s may not be fully functional."
+
+#: admin/oik-activation.php:199
+msgid ""
+"Please install and activate the required minimum version of this plugin: %1$s"
+msgstr "Please install and activate the required minimum version of this plugin: %1$s"
+
+#: admin/oik-f2t.php:21 admin/oik-types-admin.php:47
 msgid "Fields to Types"
-msgstr ""
+msgstr "Fields to Types"
 
-#: admin/oik-f2t.php:43 admin/oik-fields.php:46 admin/oik-taxonomies.php:46
-#: admin/oik-types.php:43 admin/oik-x2t.php:43
+#: admin/oik-f2t.php:43 admin/oik-fields.php:46 admin/oik-taxonomies.php:45
+#: admin/oik-types.php:42 admin/oik-x2t.php:43
 msgid "Preview"
-msgstr ""
+msgstr "Preview"
 
-#: admin/oik-f2t.php:66 admin/oik-fields.php:69 admin/oik-taxonomies.php:69
-#: admin/oik-types.php:62 admin/oik-x2t.php:66
+#: admin/oik-f2t.php:66 admin/oik-fields.php:69 admin/oik-taxonomies.php:68
+#: admin/oik-types.php:61 admin/oik-x2t.php:66
 msgid "Add new"
-msgstr ""
+msgstr "Add new"
 
 #: admin/oik-f2t.php:72
 msgid "Fields to types relationships"
-msgstr ""
+msgstr "Fields to types relationships"
 
 #: admin/oik-f2t.php:139
 msgid "Relationship already defined, try another type or field"
-msgstr ""
+msgstr "Relationship already defined, try another type or field"
 
 #: admin/oik-f2t.php:183
 msgid "f2t must not be blank"
-msgstr ""
+msgstr "f2t must not be blank"
 
 #: admin/oik-f2t.php:270
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: admin/oik-f2t.php:273
 msgid "Field"
-msgstr ""
+msgstr "Field"
 
-#: admin/oik-f2t.php:287 admin/oik-fields.php:449 admin/oik-taxonomies.php:333
-#: admin/oik-types.php:630 admin/oik-x2t.php:283
+#: admin/oik-f2t.php:287 admin/oik-fields.php:449 admin/oik-taxonomies.php:344
+#: admin/oik-types.php:659 admin/oik-x2t.php:283
 msgid "Preview not yet implemented"
-msgstr ""
+msgstr "Preview not yet implemented"
 
 #: admin/oik-fields.php:24 admin/oik-types-admin.php:18
-#: admin/oik-types-admin.php:43
+#: admin/oik-types-admin.php:45
 msgid "Fields"
-msgstr ""
+msgstr "Fields"
 
 #: admin/oik-fields.php:73
 msgid "Edit field"
-msgstr ""
+msgstr "Edit field"
 
 #: admin/oik-fields.php:75
 msgid "fields"
-msgstr ""
+msgstr "fields"
 
 #: admin/oik-fields.php:176
 msgid "Field must not be blank"
-msgstr ""
+msgstr "Field must not be blank"
 
-#: admin/oik-fields.php:278 admin/oik-taxonomies.php:291
+#: admin/oik-fields.php:278 admin/oik-taxonomies.php:295
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: admin/oik-fields.php:283 admin/oik-fields.php:429
-#: admin/oik-taxonomies.php:297 admin/oik-taxonomies.php:317
+#: admin/oik-taxonomies.php:304 admin/oik-taxonomies.php:327
+#: admin/oik-types.php:549
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 #: admin/oik-fields.php:359 admin/oik-fields.php:385
 msgid "Single or multiple select"
-msgstr ""
+msgstr "Single or multiple select"
 
 #: admin/oik-fields.php:360
 msgid "Optional"
-msgstr ""
+msgstr "Optional"
 
 #: admin/oik-fields.php:384
 msgid "Options"
-msgstr ""
+msgstr "Options"
 
-#: admin/oik-taxonomies.php:24 admin/oik-taxonomies.php:75
+#: admin/oik-taxonomies.php:23 admin/oik-taxonomies.php:74
 msgid "taxonomies"
-msgstr ""
+msgstr "taxonomies"
 
-#: admin/oik-taxonomies.php:73
+#: admin/oik-taxonomies.php:72
 msgid "Edit taxonomy"
-msgstr ""
+msgstr "Edit taxonomy"
 
-#: admin/oik-taxonomies.php:189
+#: admin/oik-taxonomies.php:191
 msgid "Taxonomy must not be blank and not more than 32 characters"
-msgstr ""
+msgstr "Taxonomy must not be blank and not more than 32 characters"
 
-#: admin/oik-taxonomies.php:279
+#: admin/oik-taxonomies.php:273
+msgid "Add taxonomy"
+msgstr "Add taxonomy"
+
+#: admin/oik-taxonomies.php:283
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
-#: admin/oik-taxonomies.php:280
+#: admin/oik-taxonomies.php:284
 msgid "Categories"
-msgstr ""
+msgstr "Categories"
 
-#: admin/oik-taxonomies.php:292 admin/oik-taxonomies.php:316
+#: admin/oik-taxonomies.php:296 admin/oik-taxonomies.php:324
 msgid "Label"
-msgstr ""
+msgstr "Label"
+
+#: admin/oik-taxonomies.php:299 admin/oik-taxonomies.php:326
+#: admin/oik-types.php:350 admin/oik-types.php:642
+msgid "Singular label"
+msgstr "Singular label"
+
+#: admin/oik-taxonomies.php:328
+msgid "Show in REST"
+msgstr "Show in REST"
+
+#: admin/oik-taxonomies.php:331
+msgid "Change taxonomy"
+msgstr "Change taxonomy"
 
 #: admin/oik-types-admin.php:15
 msgid "[oik] Types"
-msgstr ""
+msgstr "[oik] Types"
 
 #: admin/oik-types-admin.php:15 admin/oik-types-admin.php:17
-#: admin/oik-types-admin.php:42
+#: admin/oik-types-admin.php:44
 msgid "Types"
-msgstr ""
+msgstr "Types"
 
 #: admin/oik-types-admin.php:16
 msgid "Summary"
-msgstr ""
+msgstr "Summary"
 
 #: admin/oik-types-admin.php:17
 msgid "oik types"
-msgstr ""
+msgstr "oik types"
 
 #: admin/oik-types-admin.php:18
 msgid "oik fields"
-msgstr ""
+msgstr "oik fields"
 
 #: admin/oik-types-admin.php:19
 msgid "oik taxonomies"
-msgstr ""
+msgstr "oik taxonomies"
 
-#: admin/oik-types-admin.php:19 admin/oik-types-admin.php:44
+#: admin/oik-types-admin.php:19 admin/oik-types-admin.php:46
 msgid "Taxonomies"
-msgstr ""
+msgstr "Taxonomies"
 
 #: admin/oik-types-admin.php:20
 msgid "oik fields to types"
-msgstr ""
+msgstr "oik fields to types"
 
 #: admin/oik-types-admin.php:20
 msgid "Fields to types"
-msgstr ""
+msgstr "Fields to types"
 
 #: admin/oik-types-admin.php:21
 msgid "oik taxonomies to types"
-msgstr ""
+msgstr "oik taxonomies to types"
 
 #: admin/oik-types-admin.php:21
 msgid "Taxonomies to types"
-msgstr ""
+msgstr "Taxonomies to types"
 
-#: admin/oik-types-admin.php:41 admin/oik-types.php:21 admin/oik-types.php:68
+#: admin/oik-types-admin.php:43 admin/oik-types.php:20 admin/oik-types.php:67
 msgid "types"
-msgstr ""
+msgstr "types"
 
-#: admin/oik-types-admin.php:46 admin/oik-x2t.php:21
+#: admin/oik-types-admin.php:48 admin/oik-x2t.php:21
 msgid "Taxonomies to Types"
-msgstr ""
+msgstr "Taxonomies to Types"
 
-#: admin/oik-types.php:66
+#: admin/oik-types.php:65
 msgid "Edit type"
-msgstr ""
+msgstr "Edit type"
 
-#: admin/oik-types.php:70
+#: admin/oik-types.php:69
 msgid "registered types"
-msgstr ""
+msgstr "registered types"
 
-#: admin/oik-types.php:269
+#: admin/oik-types.php:253
 msgid "Type must not be blank"
-msgstr ""
+msgstr "Type must not be blank"
 
-#: admin/oik-types.php:358
+#: admin/oik-types.php:315
+msgid "Add type"
+msgstr "Add type"
+
+#: admin/oik-types.php:347
 msgid "Post type"
-msgstr ""
+msgstr "Post type"
 
-#: admin/oik-types.php:359 admin/oik-types.php:611
+#: admin/oik-types.php:348 admin/oik-types.php:640
 msgid "Plural label"
-msgstr ""
+msgstr "Plural label"
 
-#: admin/oik-types.php:361 admin/oik-types.php:613
-msgid "Singular label"
-msgstr ""
-
-#: admin/oik-types.php:362 admin/oik-types.php:614
+#: admin/oik-types.php:351 admin/oik-types.php:643
 msgid "Description"
-msgstr ""
+msgstr "Description"
+
+#: admin/oik-types.php:493
+msgid "Archive sort"
+msgstr "Archive sort"
+
+#: admin/oik-types.php:494
+msgid "Archive posts per page"
+msgstr "Archive posts per page"
+
+#: admin/oik-types.php:515
+msgid "Supports"
+msgstr "Supports"
+
+#: admin/oik-types.php:539
+msgid "Author"
+msgstr "Author"
+
+#: admin/oik-types.php:540
+msgid "Comments"
+msgstr "Comments"
+
+#: admin/oik-types.php:541
+msgid "Custom fields"
+msgstr "Custom fields"
+
+#: admin/oik-types.php:542
+msgid "Content editor"
+msgstr "Content editor"
+
+#: admin/oik-types.php:543
+msgid "Excerpt"
+msgstr "Excerpt"
+
+#: admin/oik-types.php:544
+msgid "Page attributes"
+msgstr "Page attributes"
+
+#: admin/oik-types.php:545
+msgid "Post formats"
+msgstr "Post formats"
+
+#: admin/oik-types.php:546
+msgid "Revisions"
+msgstr "Revisions"
+
+#: admin/oik-types.php:547
+msgid "Thumbnail - featured image"
+msgstr "Thumbnail - featured image"
+
+#: admin/oik-types.php:548
+msgid "Trackbacks"
+msgstr "Trackbacks"
+
+#: admin/oik-types.php:646
+msgid "Change type"
+msgstr "Change type"
 
 #: admin/oik-x2t.php:72
 msgid "Taxonomies to types relationships"
-msgstr ""
+msgstr "Taxonomies to types relationships"
 
 #: admin/oik-x2t.php:134
 msgid "Relationship already defined, try another Type or Taxonomy"
-msgstr ""
+msgstr "Relationship already defined, try another Type or Taxonomy"
 
 #: admin/oik-x2t.php:178
 msgid "x2t must not be blank"
-msgstr ""
+msgstr "x2t must not be blank"
 
 #: admin/oik-x2t.php:267
 msgid "taxonomy"
-msgstr ""
+msgstr "taxonomy"
 
-#. Plugin Name of the plugin/theme
 msgid "oik-types"
-msgstr ""
+msgstr "oik-types"
 
-#. Plugin URI of the plugin/theme
-msgid "http://www.oik-plugins.com/oik-plugins/oik-types"
-msgstr "http://www.oik-plugins.com/oik-plugins/oik-types"
+msgid "https://www.oik-plugins.com/oik-plugins/oik-types"
+msgstr "https://www.oik-plugins.com/oik-plugins/oik-types"
 
-#. Description of the plugin/theme
 msgid "oik types - custom post types, fields and taxonomies UI"
-msgstr ""
+msgstr "oik types - custom post types, fields and taxonomies UI"
 
-#. Author of the plugin/theme
 msgid "bobbingwide"
-msgstr ""
+msgstr "bobbingwide"
 
-#. Author URI of the plugin/theme
-msgid "http://www.oik-plugins.com//author/bobbingwide"
-msgstr "http://www.oik-plugins.com//author/bobbingwide"
+msgid "https://www.bobbingwide.com/about-bobbing-wide"
+msgstr "https://www.bobbingwide.com/about-bobbing-wide"
 
