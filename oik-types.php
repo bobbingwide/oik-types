@@ -4,7 +4,7 @@ Plugin Name: oik-types
 Plugin URI: https://www.oik-plugins.com/oik-plugins/oik-types
 Description: oik types - custom post types, fields and taxonomies UI
 Depends: oik base plugin, oik fields
-Version: 2.0.0
+Version: 2.1.0
 Author: bobbingwide
 Author URI: https://www.bobbingwide.com/about-bobbing-wide
 License: GPL2
@@ -71,6 +71,10 @@ function oikcpt_adjust_args( $data_args, $cast=true, $original_args=array() ) {
 		if ( $key == "singular_name" ) {
 			$key = "singular_label";
 		}
+		if ( $key == "labels" && isset( $original_args[ $key ] ) ) {
+			$labels = ( array ) $data;
+			$data = array_merge( $labels, $original_args[ $key] );
+		}
 		//bw_trace2( $data, "data", false );  
 		if ( $data ) {
 			$args[$key] = $data;
@@ -79,6 +83,7 @@ function oikcpt_adjust_args( $data_args, $cast=true, $original_args=array() ) {
 				$args[$key] = false;
 			}
 		}
+
 	}
 	bw_trace2( $args, "args", true, BW_TRACE_VERBOSE );
 	return( $args );
@@ -102,6 +107,7 @@ function oikcpt_register_post_type( $type, $data ) {
 			$args['capabilities'] = $args['cap'];
 			unset( $args['cap'] ) ;
 		}
+		unset( $args['labels'] );
 		bw_register_post_type( $type, $args );
 	}  
 }
