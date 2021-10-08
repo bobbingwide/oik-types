@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.094995">
-    <testsuite name="oik-types" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.094995">
-      <testsuite name="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.094995">
-        <testcase name="test_bw_return_singular_name" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="20" assertions="3" time="0.077683"/>
-        <testcase name="test_oiktax_register_taxonomy" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="40" assertions="6" time="0.017312"/>
+  <testsuite name="" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.466400">
+    <testsuite name="oik-types" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.466400">
+      <testsuite name="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.466400">
+        <testcase name="test_bw_return_singular_name" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="20" assertions="3" time="0.436623"/>
+        <testcase name="test_oiktax_register_taxonomy" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="40" assertions="6" time="0.029777"/>
       </testsuite>
     </testsuite>
   </testsuite>
