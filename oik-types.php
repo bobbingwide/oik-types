@@ -437,11 +437,22 @@ function oikcpt_plugin_loaded() {
   add_action( "oik_fields_loaded", "oikx2t_fields_loaded", 15 );
   add_action( "oik_admin_menu", "oikcpt_admin_menu" );
   add_action( "admin_notices", "oik_types_activation" );
-  add_action( "pre_get_posts", "oik_types_pre_get_posts" );
-	add_action( "pre_get_posts", "oik_types_pre_get_posts_for_archive", 11 );
-	add_filter( "posts_orderby", "oik_types_posts_orderby", 10, 2 ); 
+ 	add_filter( "posts_orderby", "oik_types_posts_orderby", 10, 2 );
 	add_action( "setup_theme", "oik_types_setup_theme" );
 	add_action( "run_oik-types.php", "oik_types_run_oik_types" );
+	add_action( 'wp_loaded', 'oikcpt_wp_loaded');
+}
+
+/**
+ * Implements wp_loaded action.
+ *
+
+ * To avoid the 'is called incorrectly' notice we
+ * wait until `wp_loaded` before hooking into `pre_get_posts`.
+ */
+function oikcpt_wp_loaded() {
+    add_action( "pre_get_posts", "oik_types_pre_get_posts" );
+    add_action( "pre_get_posts", "oik_types_pre_get_posts_for_archive", 11 );
 }
 
 /**
