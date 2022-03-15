@@ -4,8 +4,8 @@
 * Donate link: https://www.oik-plugins.com/oik/oik-donate/
 * Tags: custom post types, custom fields, and custom taxonomies UI for oik
 * Requires at least: 5.2.0
-* Tested up to: 5.8.1
-* Stable tag: 2.1.0
+* Tested up to: 5.9.2
+* Stable tag: 2.2.0
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 ## Upgrade Notice 
+# 2.2.0 
+Upgrade for two fixes for unwanted messages.
+
 # 2.1.0 
 Upgrade for a fix for compatibility with WordPress 5.8 and navigation link variations
 
@@ -165,6 +168,13 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 ## Changelog 
+# 2.2.0 
+* Fixed: Avoid Notice when is_home is called incorrectly #24
+* Fixed: Avoid warning adding new type #22
+* Tested: With WordPress 5.9.2 and WordPress Multi Site
+* Tested: With PHP 8.0
+* Tested: With PHPUnit 9
+
 # 2.1.0 
 * Changed: Use latest version of labels #21
 * Tested: With WordPress 5.8.1 and WordPress Multi Site
