@@ -342,6 +342,11 @@ function oik_cpt_registered_types() {
  */
 function oik_cpt_add_oik_cpt( ) {
   global $bw_type;
+  //print_r( $bw_type);
+  if ( null === $bw_type ) {
+	  _oik_cpt_type_validate();
+
+  }
   bw_form();
   stag( "table", "wide-fat" );
   bw_textfield( "type", 20, "Post type", $bw_type['args']['type'] );
