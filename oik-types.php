@@ -123,8 +123,6 @@ function oikcpt_register_post_type( $type, $data ) {
  * 
  */
 function bw_update_archive_stuff( $type, $value ) {
-
-
 }
 
 /**
@@ -360,7 +358,7 @@ function oik_types_activation() {
  * @return WP_Query - the updated query object 
  */
 function oik_types_pre_get_posts( $query ) {
-	//bw_trace2();
+
 	if ( is_home() && false == $query->get('suppress_filters') ) {
 		$post_types = array( "post" );
 		global $wp_post_types;
@@ -376,6 +374,7 @@ function oik_types_pre_get_posts( $query ) {
 		$query->set( 'post_type', $post_types );
 		remove_filter( "pre_get_posts", "oik_types_pre_get_posts" );
 	}
+	bw_trace2( $query, "Query", false, BW_TRACE_VERBOSE );
 	return( $query );
 }
 
@@ -589,11 +588,11 @@ function oik_types_get_involved_taxonomies_post_types( $query ) {
 }
 
 /**
- * Order front-end archives by post title 
+ * Order front-end archives by user selected option.
  *
  * Except when it's posts or navigation menu items.
  *  
- * @TODO Use the setting defined for the post type / taxonomy
+ * @TODO Use the setting defined for the taxonomy
  *
  * @param string $orderby - current value of orderby
  * @param object $query - a WP_Query object
@@ -605,7 +604,12 @@ function oik_types_posts_orderby( $orderby, $query ) {
 	global $wpdb;
 	if ( !is_admin() && $post_type && $post_type !== 'post' && $post_type !== 'nav_menu_item' ) {
 		if ( $query->is_post_type_archive() ) {
-			$orderby = "$wpdb->posts.post_title asc";
+            //$orderby = "$wpdb->posts.post_title asc";
+            $post_type_object = get_post_type_object($post_type);
+            bw_trace2( $post_type_object, 'post_type_object', false, BW_TRACE_VERBOSE );
+            if ( property_exists($post_type_object, 'archive_sort')) {
+               $orderby = oik_types_apply_archive_sort( $orderby, $post_type_object->archive_sort );
+            }
 		}
 		if ( $query->is_tax() ) {
 			$orderby = "$wpdb->posts.post_title asc";
@@ -614,8 +618,25 @@ function oik_types_posts_orderby( $orderby, $query ) {
 			$orderby = "$wpdb->posts.post_title asc";
 		}
 	}
-	//bw_trace2( $orderby, "orderby", false );
+	bw_trace2( $orderby, "orderby", false, BW_TRACE_VERBOSE );
 	return( $orderby );
+}
+
+function oik_types_apply_archive_sort( $orderby, $archive_sort ) {
+    global $wpdb;
+    $archive_sort = trim( $archive_sort );
+    switch ( $archive_sort ) {
+        case '':
+            // Don't change the default orderby
+            break;
+        case 'title':
+            $orderby = "$wpdb->posts.post_title asc";
+            break;
+        default:
+            $orderby = "$wpdb->posts.$archive_sort";
+            break;
+    }
+    return $orderby;
 }
 
 /**
