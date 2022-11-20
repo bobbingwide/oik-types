@@ -152,7 +152,8 @@ function _oik_cpt_type_row( $type, $data ) {
   $row[] = esc_html( stripslashes( $args['description'] ) ) . "&nbsp";  
   $row[] = icheckbox( "hierarchical[$type]", $args['hierarchical'], true );
   $args['has_archive'] = bw_array_get( $args, 'has_archive', null );
-  $row[] = icheckbox( "has_archive[$type]", $args['has_archive'], true );
+  $row[] = icheckbox( "has_archive[$type]", $args['has_archive'], true ) . $args['has_archive'];
+
   $links = null;
   //$row[] = icheckbox( "expand[$type]", $expand, true );
   //$links = retlink( null, admin_url("admin.php?page=oik_types&amp;preview_type=$type"), "Preview" );
@@ -267,6 +268,12 @@ function _oik_cpt_type_validate( $add_type=true ) {
   $bw_type['args']['description'] = bw_array_get( $_REQUEST, "description", null );
   $bw_type['args']['hierarchical'] = bw_array_get( $_REQUEST, "hierarchical", null );
   $bw_type['args']['has_archive'] = bw_array_get( $_REQUEST, "has_archive", null );
+
+  $archive_slug = bw_array_get( $_REQUEST, 'archive_slug', null );
+  if ( null !== $archive_slug && $bw_type['args']['has_archive'] ) {
+      $bw_type['args']['has_archive'] = oik_cpt_get_has_archive_from_slug( $archive_slug );
+  }
+
   $bw_type['args']['title'] = bw_array_get( $_REQUEST, "title", null );
   $bw_type['args']['public'] = bw_array_get( $_REQUEST, "public", null );
   $bw_type['args']['exclude_from_search'] = bw_array_get( $_REQUEST, "exclude_from_search", null );
@@ -475,7 +482,9 @@ Default:
 function oik_cpt_edit_type_fields( $bw_type ) {
 
   bw_checkbox( "hierarchical", "Hierarchical type?", $bw_type['args']["hierarchical"] );
-  bw_checkbox( "has_archive", "Has archive?", bw_array_get( $bw_type['args'], "has_archive", false) );
+  oik_cpt_edit_has_archive( $bw_type) ;
+
+
   bw_checkbox( "public", "Public", $bw_type['args']["public"] );
   bw_checkbox( "exclude_from_search", "Exclude from search", $bw_type['args']["exclude_from_search"] ); 
   bw_checkbox( "publicly_queryable", "Publicly queryable", $bw_type['args']["publicly_queryable"] ); 
@@ -485,7 +494,7 @@ function oik_cpt_edit_type_fields( $bw_type ) {
   bw_checkbox( "show_in_admin_bar", "Show in admin bar", bw_array_get( $bw_type['args'], "show_in_admin_bar", true ) ); 
 	bw_checkbox( "show_in_rest", "Show in REST", bw_array_get( $bw_type['args'], "show_in_rest", false ) );
   // bw_checkbox( "rewrite", "Rewrite", $bw_type['args']["rewrite"] ); 
-  oik_cpt_edit_rewrite( $bw_type['args']['supports'] ); 
+  oik_cpt_edit_rewrite( $bw_type['args']['rewrite'] );
   
   //bw_checkbox( "", "", $bw_type['args'][""] ); 
   //bw_checkbox( "", "", $bw_type['args'][""] ); 
@@ -630,7 +639,66 @@ function oik_cpt_oik_post_type_supports_unknown_registered( $supports_options ) 
  * 
  */
 function oik_cpt_edit_rewrite( $rewrite ) {
-  bw_trace2(); 
+
+  bw_trace2();
+ // print_r( $rewrite );
+ //bw_checkbox( "rewrite", "Rewrite",  );
+}
+
+/**
+ * Displays the archive slug for editing.
+ *
+ * @param $bw_type
+ */
+function oik_cpt_edit_has_archive( $bw_type ) {
+    $archive_slug = bw_array_get( $bw_type['args'], 'has_archive', false );
+    //bw_trace2( $archive_slug, "archive_slug");
+    bw_checkbox( "has_archive", "Has archive?", $archive_slug );
+    switch ($archive_slug ) {
+        case false:
+        case '0':
+            $archive_slug = '';
+            break;
+
+        case 'on':
+            $archive_slug = '';
+            break;
+
+        default:
+
+    }
+    BW_::bw_textfield( 'archive_slug', 20, __('Archive slug', 'oik-types'), $archive_slug );
+}
+
+/**
+ * Returns the value of has_archive given the archive_slug.
+ *
+ * Note: has_archive may become the trimmed value of the archive_slug field.
+ *
+ * @param $archive_slug
+ * @return bool|string
+ */
+function oik_cpt_get_has_archive_from_slug( $archive_slug ) {
+    //bw_trace2( "£$archive_slug £", "archive_slug", false );
+    $archive_slug = trim( $archive_slug );
+    //bw_trace2( "!$archive_slug!", "archive_slug", false );
+    switch ($archive_slug ) {
+        case false:
+        case '0':
+            $archive_slug = true;
+            //bw_trace2( $archive_slug, "as:is true -  NOT false", false );
+            break;
+
+        case 'on': /* Will this happen? */
+        case '';
+            $archive_slug = true;
+            //bw_trace2( $archive_slug, "as:is true", false);
+            break;
+
+        default:
+            /* return the trimmed value */
+    }
+    return $archive_slug;
 }
 
 /** 
@@ -679,7 +747,7 @@ if ( !function_exists( "bw_update_option" ) ) {
 function bw_update_option( $field, $value=NULL, $options="bw_options" ) {
   $bw_options = get_option( $options );
   $bw_options[ $field ] = $value;
-  bw_trace2( $bw_options );
+  bw_trace2( $bw_options, "bw_options", true, BW_TRACE_VERBOSE );
   update_option( $options, $bw_options );
   return( $value );
 }
