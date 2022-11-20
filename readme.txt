@@ -3,8 +3,8 @@ Contributors: bobbingwide
 Donate link: https://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 5.2.0
-Tested up to: 5.9.2
-Stable tag: 2.2.0
+Tested up to: 6.1.1
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,170 +108,16 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
-= 2.2.0 =
-Upgrade for two fixes for unwanted messages. 
-
-= 2.1.0 = 
-Upgrade for a fix for compatibility with WordPress 5.8 and navigation link variations 
-
-= 2.0.0 = 
-Upgrade for a fix for Gutenberg Navigation blocks for existing menus.
-
-= 2.0.0-beta-20191028 = 
-Upgrade for support to override _builtin on wp_block post type
-
-= 2.0.0-beta-20191017 =
-Upgrade primarily for corrected plugin version.
-
-= 2.0.0-alpha-20181019 = 
-Upgrade for PHP 7.2 support
-
-= 1.9.2 = 
-Tested with WordPress 4.6 and REST API v2.
-
-= 1.9.1 = 
-Tested with WordPress 4.5.2
-
-= 1.9.0 = 
-Upgrade for WordPress 4.3
-
-= 1.9 =
-Upgrade for support for Genesis post type supports options
-
-= 1.8 = 
-Adds support to allow Media files to be chosen for Nav menu items
-
-= 1.7 = 
-Required to display native "attachments" on the home page. Tested with WordPress 4.1 and WordPress Multi Site.
-
-= 1.6 =   
-Required if you want to select the post types to be shown on the home page. Tested with WordPress 4.0 and WordPress Multi Site.
-
-= 1.5 = 
-Now supports "has_archive" setting on post types. Required for wp-a2z.com 
-
-= 1.4 =
-Added support for JetPack 'publicize' function. Improved dependency checking
-
-= 1.3 =
-Required for oik-plugins use of bw_related 
-
-= 1.2 =
-Required for setting more information for UI defined fields.
-Alternative is to use a plugin and write the required APIs
-
-= 1.1 =
-* Depends on oik v2.1-alpha.1028 and oik-fields v1.19.1028
-
-= 0.1 = 
-Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
+= 2.3.0 =
+Upgrade for improved control over sort order on archives. 
 
 == Changelog ==
-= 2.2.0 = 
-* Fixed: Avoid Notice when is_home is called incorrectly #24
-* Fixed: Avoid warning adding new type #22
-* Tested: With WordPress 5.9.2 and WordPress Multi Site
+= 2.3.0 = 
+* Changed: Implement archive_sort by post type #9
+* Changed: Correct setting of has_archive from archive_slug #25
+* Tested: With WordPress 6.1.1 and WordPress Multi Site
 * Tested: With PHP 8.0
 * Tested: With PHPUnit 9
-
-= 2.1.0 =
-* Changed: Use latest version of labels #21
-* Tested: With WordPress 5.8.1 and WordPress Multi Site
-* Tested: With PHP 8.0
-* Tested: With PHPUnit 9
-
-= 2.0.0 = 
-* Fixed: Don't change orderby for nav_menu_item,[github bobbingwide oik-types issues 9]
-* Tested: With WordPress 5.7 and WordPress Multi Site
-* Tested: With PHP 8.0
-* Tested: With PHPUnit 9
-
-= 2.0.0-beta-20191028 = 
-* Changed: Add checkbox to allow oik-types to override the _builtin value,[github bobbingwide oik-types issues 19]
-* Tested: With WordPress 5.3-RC2
-
-= 2.0.0-beta-20191017 =
-* Fixed: Don't adjust orderby when the post_type is explicitly set to 'post',[github bobbingwide issues 9]
-* Changed: Added some simple PHPUnit tests for issues #5 and 16
-* Tested: With WordPress 5.2.4 and WordPress Multi Site
-* Tested: With WordPress 5.3-RC1
-* Tested: With PHP 7.3 and PHPUnit 8
-* Tested: With Gutenberg 6.7.0
-
-= 2.0.0-alpha-20181019 =
-* Added: Add show_in_rest checkbox [github bobbingwide oik-types issue 13]
-* Changed: Add batch setting of archive_posts_per_page. First version [github bobbingwide oik-types issue 8] 
-* Changed: Add more strings to oik_cpt_oik_post_type_supports [github bobbingwide oik-types issue 14]
-* Changed: Add singular_name to custom taxonomies [github bobbingwide oik-types issue 16]
-* Changed: Add three more post_type_supports values [github bobbingwide oik-types issue 2]
-* Changed: Depends on oik v3.2.3
-* Changed: Don't alter orderby for posts. [github bobbingwide oik-types issue 9]
-* Changed: Eliminate deprecated messages from bw_translate [github bobbingwide oik-types issue 15]
-* Changed: Force orderby title ASC for taxonomy and category queries [github bobbingwide oik-types issue 9]
-* Changed: Pass $args rather than $label in oiktax_register_taxonomy
-* Changed: Set posts_per_page for the main taxonomy archive query [github bobbingwide oik-types issue 9]
-* Changed: Support PHP 7.1 and PHP 7.2 [github bobbingwide oik-types issue 7] 
-* Tested: With WordPress 4.9.8
-
-= 1.9.2 =
-* Changed: Support for WordPress 4.6 [github bobbingwide oik-types issue 4]
-* Changed: Don't prevent programmed registrations requiring REST API support [github bobbingwide oik-types issue 5]
-
-= 1.9.1 = 
-* Added: Improve support for the multi-select "post_type_support" select box [github bobbingwide oik-types issue 2]
-* Added: Language files, though they may be out of date
-* Added: Order by capability for the front-end. Note: this is only a partial solution
-* Added: Respond to 'register_post_types_args' filter [github bobbingwide oik-types issue 3]
-* Added: Workaround for WordPress TRAC 36579
-* Added: posts_per_page for the front-end
-* Changed: Trace levels, whitespace and docblocks
-* Tested: With WordPress 4.5.2 and WordPress MultiSite
-
-= 1.9.0 = 
-* Fixed: Applied a workaround to overcome problems raised as WordPress TRAC #33543.
-* Tested: with WordPress 4.3
-
-= 1.9 = 
-* Added: Support for 'post type supports' options for Genesis: genesis-layouts, genesis-seo, genesis-scripts, genesis-cpt-archives-settings
-* Added: Screenshots
-* Added: Language files for bb_BB ( bbboing ) test language
-
-= 1.8 =
-* Added: Now supports selection of Media files from Nav menus
-
-= 1.7 = 
-* Added: "home" post_type support for the native "attachment" post_type. Extends the "pre_get_posts" filter.
-
-= 1.6 = 
-* Added: "home" post_type_support value for identifying post types which will appear on the front page / blog page
-* Added: "pre_get_posts" filter to handle post types with post_type_support of "home"
-* Fixed: Column headings for Taxonomies
-* Added: Show in admin bar checkbox. De-select to remove less used post types from the drop down Add new menu
-* Fixed: Add "Archive?" to post type column headings.
-* Started: Started developing logic to cater for changes to the "has_archive" setting, to correct rewrite rules
-* Changed: Commented out most bw_trace2() calls 
- 
-= 1.5 =
-* Added: Support for has_archive. Simple implementation as a check box.
-
-= 1.4 = 
-* Added: Support for JetPack 'publicize' - can be selected for ANY post type
-* Changed: Dependency checking. Now depends on oik v2.2 and oik-fields v1.35
-
-= 1.3 =
-* Added: Support for the #optional setting for 'noderef' and 'select' type fields
-* Added: Dependency checking on oik and oik-fields
-
-= 1.2 = 
-* Added: Some field options can now be defined in the admin pages. types > fields
-* Added: rewrite setting for types - work in progress
-* Changed: Some usage notes in this file.
-
-= 1.1 =
-* First version on oik-plugins.co.uk
-
-= 0.1 = 
-* Added: New plugin
 
 == Further reading ==
 Read more about oik plugins and themes
