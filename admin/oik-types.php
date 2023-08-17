@@ -312,13 +312,13 @@ function _oik_cpt_type_validate( $add_type=true ) {
  */
 function oik_cpt_types() {
   BW_::p( "" );
-  bw_form();
   stag( "table", "widefat" );
   stag( "thead");
   bw_tablerow( array( "Type", "Plural", "Singular", "Description", "Hierarchical?", "Archive?", "Actions" ));
   etag( "thead");
   _oik_cpt_type_table();
   etag( "table" );
+  bw_form();
   e( isubmit( "_oik_cpt_add_type", __( "Add type", "oik-types" ), null, "button-primary" ) );
   etag( "form" );
   // bw_flush();
@@ -652,7 +652,7 @@ function oik_cpt_edit_rewrite( $rewrite ) {
  */
 function oik_cpt_edit_has_archive( $bw_type ) {
     $archive_slug = bw_array_get( $bw_type['args'], 'has_archive', false );
-    //bw_trace2( $archive_slug, "archive_slug");
+    // bw_trace2( $archive_slug, "archive_slug");
     bw_checkbox( "has_archive", "Has archive?", $archive_slug );
     switch ($archive_slug ) {
         case false:
