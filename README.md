@@ -4,8 +4,8 @@
 * Donate link: https://www.oik-plugins.com/oik/oik-donate/
 * Tags: custom post types, custom fields, and custom taxonomies UI for oik
 * Requires at least: 5.2.0
-* Tested up to: 6.1.1
-* Stable tag: 2.3.0
+* Tested up to: 6.4.1
+* Stable tag: 2.3.1
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,19 +109,18 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 ## Upgrade Notice 
-# 2.3.0 
-Upgrade for improved control over sort order on archives.
+# 2.3.1 
+Update for support for PHP 8.1 and PHP 8.2 #28
 
 ## Changelog 
 # 2.3.0 
-* Changed: Implement archive_sort by post type #9
-* Changed: Correct setting of has_archive from archive_slug #25
-* Tested: With WordPress 6.1.1 and WordPress Multi Site
-* Tested: With PHP 8.0
-* Tested: With PHPUnit 9
+* Fixed: Don't include the table in the form. #26
+* Changed: Support PHP 8.1 and PHP 8.2 #28
+* Tested: With WordPress 6.4.1 and WordPress Multisite
+* Tested: With PHP 8.0, PHP 8.1 and PHP 8.2
+* Tested: With PHPUnit 9.6
 
 ## Further reading 
 Read more about oik plugins and themes
 * [oik-plugin](https://www.oik-plugins.com)
 * [oik-fields](https://www.oik-plugins.com/oik-plugins/oik-fields)
-

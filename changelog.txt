@@ -1,4 +1,7 @@
 == Upgrade Notice ==
+= 2.3.0 =
+Upgrade for improved control over sort order on archives. 
+
 = 2.2.0 =
 Upgrade for two fixes for unwanted messages. 
 
@@ -58,6 +61,13 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 2.3.0 = 
+* Changed: Implement archive_sort by post type #9
+* Changed: Correct setting of has_archive from archive_slug #25
+* Tested: With WordPress 6.1.1 and WordPress Multi Site
+* Tested: With PHP 8.0
+* Tested: With PHPUnit 9
+
 = 2.2.0 = 
 * Fixed: Avoid Notice when is_home is called incorrectly #24
 * Fixed: Avoid warning adding new type #22
