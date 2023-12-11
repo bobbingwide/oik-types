@@ -452,6 +452,7 @@ function oikcpt_plugin_loaded() {
 function oikcpt_wp_loaded() {
     add_action( "pre_get_posts", "oik_types_pre_get_posts" );
     add_action( "pre_get_posts", "oik_types_pre_get_posts_for_archive", 11 );
+	add_action( 'pre_get_posts', 'oik_types_pre_get_category_posts', 12 );
 }
 
 /**
@@ -529,6 +530,33 @@ function oik_types_pre_get_posts_for_archive( $query ) {
 }
 
 /**
+ * Implement "pre_get_posts" for CPTs with category taxonomy.
+ *
+ * When the post type is specified in the query parms then we restrict the query to just that post type.
+ * Otherwise we extend it to all post types that are associated with the category taxonomy.
+ * @param $query
+ * @return mixed
+ */
+function oik_types_pre_get_category_posts( $query ) {
+	bw_trace2();
+	if ( $query->is_main_query() ) {
+		if ( $query->is_category() ) {
+			$post_type = bw_array_get( $query->query, 'post_type', null );
+			if ( $post_type ) {
+				// Don't extend if the post type is specfied. Limit to the selected post type.
+				$query->set( 'post_type', [$post_type] );
+			} else {
+				// RUn the query for all post types associated with category
+				$post_types=oik_types_get_involved_taxonomies_post_types( $query );
+				$query->set( 'post_type', $post_types );
+			}
+		}
+	}
+	return $query;
+}
+
+
+/**
  * Retrieves archive_posts_per_page if set.
  *
  * @param string $post_type
@@ -569,7 +597,7 @@ function oik_types_get_archive_posts_per_page_for_taxonomy( $query ) {
 /**
  * Returns array of post_types involved with the taxonomies
  * 
- * We know it's a taxonomy query so we find which post types are associated with each taxonomy 
+ * We know it's a taxonomy query, so we find which post types are associated with each taxonomy
  * and return the set. Note: The WP_Tax_Query object applies to both tags and categories. 
  * 
  * @param object $query WP_Query object
@@ -646,6 +674,3 @@ function oik_types_run_oik_types() {
 	oik_require( "admin/oik-types-cli.php", "oik-types" );
 	oik_types_lazy_run_oik_types();
 }
-
-
-
