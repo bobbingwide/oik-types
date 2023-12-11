@@ -1,4 +1,8 @@
+
 == Upgrade Notice ==
+= 2.3.1 =
+Update for support for PHP 8.1 and PHP 8.2 
+
 = 2.3.0 =
 Upgrade for improved control over sort order on archives. 
 
@@ -61,6 +65,13 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 2.3.1 = 
+* Fixed: Don't include the table in the form. #26
+* Changed: Support PHP 8.1 and PHP 8.2 #28
+* Tested: With WordPress 6.4.1 and WordPress Multisite
+* Tested: With PHP 8.0, PHP 8.1 and PHP 8.2
+* Tested: With PHPUnit 9.6
+
 = 2.3.0 = 
 * Changed: Implement archive_sort by post type #9
 * Changed: Correct setting of has_archive from archive_slug #25

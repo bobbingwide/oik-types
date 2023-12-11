@@ -4,7 +4,7 @@ Donate link: https://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 5.2.0
 Tested up to: 6.4.1
-Stable tag: 2.3.1
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,15 +108,15 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
-= 2.3.1 =
-Update for support for PHP 8.1 and PHP 8.2 #28 
+= 2.4.0 =
+Update for CPT's attached to category
+
 
 == Changelog ==
-= 2.3.0 = 
-* Fixed: Don't include the table in the form. #26
-* Changed: Support PHP 8.1 and PHP 8.2 #28
-* Tested: With WordPress 6.4.1 and WordPress Multisite
-* Tested: With PHP 8.0, PHP 8.1 and PHP 8.2
+= 2.4.0 = 
+* Changed: Add pre_get_posts logic for category taxonomy #30
+* Tested: With WordPress 6.4.2 and WordPress Multisite
+* Tested: With PHP 8.0, PHP 8.1, PHP 8.2 and PHP 8.3
 * Tested: With PHPUnit 9.6
 
 == Further reading ==
