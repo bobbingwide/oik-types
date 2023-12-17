@@ -265,7 +265,7 @@ function _oik_cpt_type_validate( $add_type=true ) {
   $bw_type['args']['type'] = bw_array_get( $_REQUEST, "type", null );
   $bw_type['args']['label'] = bw_array_get( $_REQUEST, "label", null );
   $bw_type['args']['singular_name'] = bw_array_get( $_REQUEST, "singular_name", null );
-  $bw_type['args']['description'] = bw_array_get( $_REQUEST, "description", null );
+  $bw_type['args']['description'] = bw_array_get( $_REQUEST, "description", '' );
   $bw_type['args']['hierarchical'] = bw_array_get( $_REQUEST, "hierarchical", null );
   $bw_type['args']['has_archive'] = bw_array_get( $_REQUEST, "has_archive", null );
 
@@ -352,7 +352,6 @@ function oik_cpt_add_oik_cpt( ) {
   //print_r( $bw_type);
   if ( null === $bw_type ) {
 	  _oik_cpt_type_validate();
-
   }
   bw_form();
   stag( "table", "wide-fat" );
@@ -507,6 +506,7 @@ function oik_cpt_edit_type_fields( $bw_type ) {
 	BW_::bw_textfield( "archive_sort", 30, __( "Archive sort", "oik-types" ), bw_array_get( $bw_type['args'], "archive_sort", null ) );
 	BW_::bw_textfield( "archive_posts_per_page", 4, __( "Archive posts per page", "oik-types" ), bw_array_get( $bw_type['args'], "archive_posts_per_page", null ) );
   bw_checkbox( '_builtin', 'Builtin ( Internal Use )', bw_array_get( $bw_type['args'], '_builtin', false ) );
+  oik_cpt_post_type_template( $bw_type );
 }
 
 /**
@@ -732,6 +732,18 @@ function oik_cpt_preview() {
     p( "Preview not yet implemented" );
     ediv( "oik_preview");
   }
+}
+
+function oik_cpt_post_type_template( $bw_type ) {
+	//bw_trace2();
+	$template_string = '';
+	$template = bw_array_get( $bw_type['args'], 'template', [] );
+	foreach ( $template as $block ) {
+		$template_string .= $block[0];
+		$template_string .= PHP_EOL;
+	}
+	bw_tablerow( ['Template', $template_string ]);
+	//BW_::bw_textarea( 'ro_template', 100, 'Template', $template_string, count( $template), ['readonly' => true]  );
 }
 
 if ( !function_exists( "bw_update_option" ) ) {
