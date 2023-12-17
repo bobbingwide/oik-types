@@ -48,12 +48,10 @@ function oikcpt_fields_loaded() {
  * Set the required values for the $args to register_post_type()
  * 
  * - bw_register_post_type() requires "singular_label" in order to create "singular_name"
- * - Sometimes we need to cast stdObject to an array
+ * - Sometimes we need to cast stdObject to an array. eg "cap"
  * - "on" is used as the checkbox representation of true.
  * - we only set args to false if the field is in the original array
  *
- * @TODO Determine when 'sometimes' is!
- 
  * @param array $data_args - 
  * @param bool $cast - true when we need to cast objects to arrays
  * @param array $original_args 
@@ -75,7 +73,6 @@ function oikcpt_adjust_args( $data_args, $cast=true, $original_args=array() ) {
 			$labels = ( array ) $data;
 			$data = array_merge( $labels, $original_args[ $key] );
 		}
-		//bw_trace2( $data, "data", false );  
 		if ( $data ) {
 			$args[$key] = $data;
 		} else {
@@ -83,9 +80,8 @@ function oikcpt_adjust_args( $data_args, $cast=true, $original_args=array() ) {
 				$args[$key] = false;
 			}
 		}
-
 	}
-	bw_trace2( $args, "args", true, BW_TRACE_VERBOSE );
+	//bw_trace2( $args, "args", true, BW_TRACE_VERBOSE );
 	return( $args );
 }
 
@@ -162,7 +158,8 @@ function bw_update_post_type_supports( $type, $value ) {
  */
 function bw_update_post_type( $type, $args ) {
 	$post_type_object = get_post_type_object( $type );
-	//bw_trace2( $post_type_object, "post_type_object before", true );
+	//bw_trace2( $post_type_object, "post_type_object before", true, BW_TRACE_VERBOSE );
+
 	foreach ( $args as $key => $value ) {
 		if ( $key == "labels" ) {
 			continue;
@@ -179,14 +176,18 @@ function bw_update_post_type( $type, $args ) {
 		if ( $type == 'attachment' && "show_in_nav_menus" == $key && $value ) {
 			add_filter( "nav_menu_meta_box_object", "oik_types_nav_menu_meta_box_object", 11 );
 		} 
-		if ( is_array( $value ) ) {
-			// convert to stdObject? 
-			$post_type_object->$key = (object) $value;
+		if ( is_array( $value )  ) {
+			// convert to stdObject?
+			if ( 'template' === $key ) {
+				$post_type_object->$key = $value;
 			} else {
+				$post_type_object->$key=(object) $value;
+			}
+		} else {
 			$post_type_object->$key = $value;
 		}
 	}
-	//bw_trace2( $post_type_object, "post_type_object after", false );
+	//bw_trace2( $post_type_object, "post_type_object after", false, BW_TRACE_VERBOSE );
 } 
 
 /**
@@ -489,8 +490,9 @@ function oik_types_register_post_type_args( $args, $post_type ) {
 		$oik_types_override = bw_array_get( $bw_types, $post_type, null );
 		if ( $oik_types_override ) {
 			$override_args = oikcpt_adjust_args( $oik_types_override['args'], false, $args );
-			bw_trace2( $override_args, "override_args", true, BW_TRACE_VERBOSE );
+			//bw_trace2( $override_args, "override_args", true, BW_TRACE_VERBOSE );
 			$args = array_merge( $args, $override_args );
+			//bw_trace2( $args, "args", false, BW_TRACE_VERBOSE);
 		}
 	}	
 	return( $args );
