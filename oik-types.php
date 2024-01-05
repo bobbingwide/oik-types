@@ -546,7 +546,7 @@ function oik_types_pre_get_category_posts( $query ) {
 			$post_type = bw_array_get( $query->query, 'post_type', null );
 			if ( $post_type ) {
 				// Don't extend if the post type is specfied. Limit to the selected post type.
-				$query->set( 'post_type', [$post_type] );
+				$query->set( 'post_type', $post_type );
 			} else {
 				// RUn the query for all post types associated with category
 				$post_types=oik_types_get_involved_taxonomies_post_types( $query );
