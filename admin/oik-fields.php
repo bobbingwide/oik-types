@@ -196,9 +196,8 @@ function _oik_fie_field_validate( $add_field=true ) {
   global $bw_field;
   $bw_field['args']['field'] = bw_array_get( $_REQUEST, "field", null );
   $bw_field['args']['type'] = bw_array_get( $_REQUEST, "type", null );
-  $bw_field['args']['title'] = bw_array_get( $_REQUEST, "title", null );
+  $bw_field['args']['title'] = bw_array_get( $_REQUEST, "title", '' );
   $bw_field['args']['required'] = bw_array_get( $_REQUEST, "required", null );
-  $bw_field['args']['title'] = bw_array_get( $_REQUEST, "title", null );
   
   /** These are variable values that should be set depending on the field type
    */
@@ -273,6 +272,9 @@ function oik_fie_fields() {
  */
 function oik_fie_add_oik_fie( ) {
   global $bw_field;
+	if ( null === $bw_field ) {
+		_oik_fie_field_validate();
+	}
   bw_form();
   stag( "table", "wide-fat" );
   bw_textfield( "field", 20, "Name", $bw_field['args']['field'] );
