@@ -1,4 +1,7 @@
 == Upgrade Notice ==
+= 2.4.1 =
+Update for a fix for CPT's which include block templates.
+
 = 2.4.0 =
 Update for CPT's attached to category
 
@@ -67,6 +70,13 @@ Alternative is to use a plugin and write the required APIs
 Requires oik base plugin version 2.1-alpha or above and oik-fields v1.19 or above
 
 == Changelog ==
+= 2.4.1 = 
+* Fixed: Don't convert template array back to stdObject #27
+* Changed: Display an excerpt of the template with oik_cpt_post_type_template() #27
+* Tested: With WordPress 6.4.2 and WordPress Multisite
+* Tested: With PHP 8.0, PHP 8.1, PHP 8.2 and PHP 8.3
+* Tested: With PHPUnit 9.6
+
 = 2.4.0 = 
 * Changed: Add pre_get_posts logic for category taxonomy #30
 * Tested: With WordPress 6.4.2 and WordPress Multisite

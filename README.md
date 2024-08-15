@@ -4,8 +4,8 @@
 * Donate link: https://www.oik-plugins.com/oik/oik-donate/
 * Tags: custom post types, custom fields, and custom taxonomies UI for oik
 * Requires at least: 5.2.0
-* Tested up to: 6.4.2
-* Stable tag: 2.4.1
+* Tested up to: 6.6.1
+* Stable tag: 2.4.2
 * License: GPLv2 or later
 * License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,15 +109,15 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 ## Upgrade Notice 
-# 2.4.1 
-Update for a fix for CPT's which include block templates.
+# 2.4.2 
+Update for a fix for when Categories are attached to CPTs
 
 ## Changelog 
-# 2.4.1 
-* Fixed: Don't convert template array back to stdObject #27
-* Changed: Display an excerpt of the template with oik_cpt_post_type_template() #27
-* Tested: With WordPress 6.4.2 and WordPress Multisite
-* Tested: With PHP 8.0, PHP 8.1, PHP 8.2 and PHP 8.3
+# 2.4.2 
+* Changed: Support PHP 8.3 #28
+* Fixed: Set post type as string when specifically identified. #30
+* Tested: With WordPress 6.6.1 and WordPress Multisite
+* Tested: With PHP 8.3
 * Tested: With PHPUnit 9.6
 
 ## Further reading 
