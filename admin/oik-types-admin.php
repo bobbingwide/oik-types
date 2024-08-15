@@ -113,7 +113,7 @@ function bw_return_singular_name( $args ) {
       $singular_name = bw_array_get( $labels, "singular_name", null );
     }  
   }
-  return( $singular_name );
+  return $singular_name ?? '' ;
 }   
  
 
