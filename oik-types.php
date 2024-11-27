@@ -562,6 +562,10 @@ function oik_types_pre_get_category_posts( $query ) {
 /**
  * Retrieves archive_posts_per_page if set.
  *
+ * Note: In some instances the post_type is an array not a string.
+ * This occurs when the query param is for example post_type[0]=post.
+ * With the current code get_post_type_object() will return null.
+ *
  * @param string $post_type
  * @return null|integer
  */
@@ -570,7 +574,7 @@ function oik_types_get_archive_posts_per_page( $post_type ) {
 	//bw_trace2( $post_type, "post_type");
 	$post_type_object = get_post_type_object( $post_type );
 	//bw_trace2( $post_type_object, "post_type_object", false );
-	if ( property_exists( $post_type_object, "archive_posts_per_page" ) ) {
+	if ( $post_type_object && property_exists( $post_type_object, "archive_posts_per_page" ) ) {
 		$archive_posts_per_page = $post_type_object->archive_posts_per_page;
 	}
 	return( $archive_posts_per_page );

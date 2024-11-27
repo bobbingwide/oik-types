@@ -1,6 +1,5 @@
-<?php // (C) Copyright Bobbing Wide 2013-2018
-
-/**
+<?php // (C) Copyright Bobbing Wide 2013-2018, 2024
+ /**
  * Lazy implementation for "oik-taxonomies" 
  *
  * oik-taxonomies options page
