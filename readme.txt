@@ -3,8 +3,8 @@ Contributors: bobbingwide
 Donate link: https://www.oik-plugins.com/oik/oik-donate/
 Tags: custom post types, custom fields, and custom taxonomies UI for oik
 Requires at least: 5.2.0
-Tested up to: 6.6.1
-Stable tag: 2.4.2
+Tested up to: 6.7.1
+Stable tag: 2.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,14 +108,13 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 == Upgrade Notice ==
-= 2.4.2 =
-Update for a fix for when Categories are attached to CPTs
+= 2.4.3 =
+Update for a fix for when the post_type query parameter is an array
 
 == Changelog ==
-= 2.4.2 = 
-* Changed: Support PHP 8.3 #28
-* Fixed: Set post type as string when specifically identified. #30
-* Tested: With WordPress 6.6.1 and WordPress Multisite
+= 2.4.3 = 
+* Fixed: Avoid Warning when post_type query parm is an array #29
+* Tested: With WordPress 6.7.1 and WordPress Multisite
 * Tested: With PHP 8.3
 * Tested: With PHPUnit 9.6
 
