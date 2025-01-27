@@ -1,4 +1,4 @@
-<?php // (C) Copyright Bobbing Wide 2013-2018, 2024
+<?php // (C) Copyright Bobbing Wide 2013-2018, 2024, 2025
  /**
  * Lazy implementation for "oik-taxonomies" 
  *
@@ -211,7 +211,7 @@ function _oik_tax_taxonomy_validate( $add_taxonomy=true ) {
   $bw_taxonomy['args']['label'] = bw_array_get( $_REQUEST, "label", null );
   ///$bw_taxonomy['args']['required'] = bw_array_get( $_REQUEST, "required", null );
   $bw_taxonomy['args']['singular_name'] = bw_array_get( $_REQUEST, "singular_name", null );
-  $bw_taxonomy['args']['title'] = bw_array_get( $_REQUEST, "title", null );
+  $bw_taxonomy['args']['title'] = bw_array_get( $_REQUEST, "title", '' );
 	$bw_taxonomy['args']['show_in_rest'] = bw_array_get( $_REQUEST, "show_in_rest", null );
   
   bw_trace2( $bw_taxonomy, "bw_taxonomy" );
@@ -289,6 +289,9 @@ function oik_tax_query_taxonomy_types( $taxonomy_types=null ) {
  */
 function oik_tax_add_oik_tax( ) {
   global $bw_taxonomy;
+  if ( null === $bw_taxonomy ) {
+	  _oik_tax_taxonomy_validate( false );
+  }
   bw_form();
   stag( "table", "wide-fat" );
   BW_::bw_textfield( "taxonomy", 32, __( "Name", "oik-types" ), $bw_taxonomy['args']['taxonomy'] );
