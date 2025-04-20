@@ -109,14 +109,14 @@ No... but there could be as it's just a case of exporting the data from wp_optio
 5. Taxonomies to types relationships
 
 ## Upgrade Notice 
-# 2.4.3 
-Update for a fix for when the post_type query parameter is an array
+# 2.4.4 
+Improved support for PHP 8.4, tested with WordPress 6.8
 
 ## Changelog 
-# 2.4.3 
-* Fixed: Avoid Warning when post_type query parm is an array #29
-* Tested: With WordPress 6.7.1 and WordPress Multisite
-* Tested: With PHP 8.3
+# 2.4.4 
+* Changed: Taxonomies admin: Support PHP 8.4. Ensure global $bw_taxonomy fields are set #28
+* Tested: With WordPress 6.8 and WordPress Multisite
+* Tested: With PHP 8.3 and PHP 8.4
 * Tested: With PHPUnit 9.6
 
 ## Further reading 

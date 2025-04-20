@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="5" assertions="12" errors="0" warnings="0" failures="0" skipped="0" time="0.260938">
-    <testsuite name="oik-types" tests="5" assertions="12" errors="0" warnings="0" failures="0" skipped="0" time="0.260938">
-      <testsuite name="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.204111">
-        <testcase name="test_load_admin_php" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" line="25" assertions="1" time="0.168957"/>
-        <testcase name="test_load_admin" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" line="45" assertions="1" time="0.019827"/>
-        <testcase name="test_load_plugin" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" line="64" assertions="1" time="0.015328"/>
+  <testsuite name="" tests="5" assertions="12" errors="0" warnings="0" failures="0" skipped="0" time="0.265126">
+    <testsuite name="oik-types" tests="5" assertions="12" errors="0" warnings="0" failures="0" skipped="0" time="0.265126">
+      <testsuite name="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" tests="3" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.236121">
+        <testcase name="test_load_admin_php" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" line="25" assertions="1" time="0.209889"/>
+        <testcase name="test_load_admin" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" line="45" assertions="1" time="0.008420"/>
+        <testcase name="test_load_plugin" class="Tests_load_libs" classname="Tests_load_libs" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-a-load-php.php" line="64" assertions="1" time="0.017812"/>
       </testsuite>
-      <testsuite name="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.056827">
-        <testcase name="test_bw_return_singular_name" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="20" assertions="3" time="0.028965"/>
-        <testcase name="test_oiktax_register_taxonomy" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="40" assertions="6" time="0.027862"/>
+      <testsuite name="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" tests="2" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.029005">
+        <testcase name="test_bw_return_singular_name" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="20" assertions="3" time="0.006052"/>
+        <testcase name="test_oiktax_register_taxonomy" class="Tests_issue_16" classname="Tests_issue_16" file="C:\apache\htdocs\wordpress\wp-content\plugins\oik-types\tests\test-issue-16.php" line="40" assertions="6" time="0.022953"/>
       </testsuite>
     </testsuite>
   </testsuite>
